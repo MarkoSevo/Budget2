@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -21,13 +20,12 @@ public class PersonDetailsDto {
     private String userName;
     private Long initialBudget;
     private Long remainingBudget;
-    private String positionId;
-    private String hardwareId;
+    private String position;
+    private List<Hardware> hardwareList;
 
     @JsonIgnore
     private List<BudgetTransaction> budgetTransactionList;
 
-    @JsonIgnore
     private List<HardwareTransaction> hardwareTransactionList;
 
     @JsonIgnore

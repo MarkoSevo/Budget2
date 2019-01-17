@@ -124,7 +124,7 @@ INSERT INTO HARDWARE_BUDGET_TRANSACTION(HARDWARE_ID,BUDGET_TRANSACTION_ID) VALUE
 
 --PERSON----------------------------------------------------------------------------------------------------------------
 INSERT INTO PERSON (FIRST_NAME, LAST_NAME, EMAIL,USERNAME)
-VALUES('Marko', 'Sevo','marko.sevo@biss.hr','Marko.Sevo');
+VALUES('Marko', 'Sevo','marko.sevo@biss.hr','MARKOSEVOUSERNAME');
 
 --BUDGET_TRANSACTION----------------------------------------------------------------------------------------------------
 INSERT INTO BUDGET_TRANSACTION (PERSON_ID, INPUT_AMOUNT, OUTPUT_AMOUNT, TRANSACTION_DATE)

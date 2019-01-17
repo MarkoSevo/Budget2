@@ -1,5 +1,6 @@
 package com.biss.demo.Budget2.repository;
 
+import com.biss.demo.Budget2.dto.PersonDetailsDto;
 import com.biss.demo.Budget2.model.HardwareTransaction;
 import com.biss.demo.Budget2.model.Person;
 import com.biss.demo.Budget2.model.Position;
@@ -24,20 +25,4 @@ public interface PersonJpaRepository extends JpaRepository<Person, Long> {
     List<Person> findByPositionList(String position);
 
     Position findByPositionList(Position positionsById);
-
-    @Query(value = "SELECT POSITION_ID \n" +
-            "FROM PERSON\n" +
-            "JOIN PERSON_POSITION PP on PERSON.ID = PP.PERSON_ID\n" +
-            "where PERSON.ID = ?", nativeQuery = true)
-    String findPersonDetailsByPersonId(Long id);
-
-    @Query(value = "SELECT SUM(INPUT_AMOUNT)-SUM(OUTPUT_AMOUNT) FROM BUDGET_TRANSACTION WHERE PERSON_ID = ?", nativeQuery = true)
-    Long findRemainingAmount (Long id);
-//
-//    @Query(value = "SELECT AMOUNT FROM BUDGET\n" +
-//            "JOIN POSITION\n" +
-//            "WHERE POSITION.ID = ?", nativeQuery = true)
-//    Long findInitialBudget (Long id);
-
-
 }
