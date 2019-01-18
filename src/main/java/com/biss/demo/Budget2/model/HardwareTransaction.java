@@ -34,7 +34,7 @@ public class HardwareTransaction {
 
     @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn (name = "person_id")
-    @JsonBackReference
+    @JsonBackReference(value = "person")
     private Person person;
 
     @ManyToOne (fetch = FetchType.LAZY)

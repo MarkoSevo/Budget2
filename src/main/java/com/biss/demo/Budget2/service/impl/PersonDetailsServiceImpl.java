@@ -38,7 +38,7 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
         dto.setPosition(positionJpaRepository.findPersonDetailsByPersonId(String.valueOf(person.getId())));
         dto.setRemainingBudget(budgetJpaRepository.findRemainingAmount(person.getId()));
         dto.setInitialBudget(budgetJpaRepository.findInitialBudget(person.getId()));
-        dto.setHardwareTransactionList(hardwareTransactionJpaRepository.findHardwareTransactionByPersonId(person.getId()));
+        dto.setHardwareTransactionList(hardwareTransactionJpaRepository.findHardwareTransactionsByPersonId(person.getId()));
         return dto;
     }
 
@@ -52,9 +52,13 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
         dto.setUserName(person.getUserName());
         dto.setPosition(positionJpaRepository.findPersonDetailsByPersonId(String.valueOf(person.getId())));
         dto.setRemainingBudget(budgetJpaRepository.findRemainingAmount(person.getId()));
-        dto.setInitialBudget(budgetJpaRepository.findInitialBudget(person.getId()));
-        dto.setHardwareTransactionList(hardwareTransactionJpaRepository.findHardwareTransactionByPersonId(person.getId()));
+       //dto.setInitialBudget(budgetJpaRepository.findFirstByAmount(person.getId()));
+        dto.setHardwareTransactionList(hardwareTransactionJpaRepository.findHardwareTransactionsByPersonId(person.getId()));
         return dto;
+    }
+
+    @Override
+    public void save(PersonDetailsDto personDetailsDto) {
     }
 
     @Override
@@ -76,16 +80,10 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
        return null;
     }
 
-
-
     @Override
     public Long findRemainingAmount(Long id) {
         return null;
     }
 
-    @Override
-    public void save(PersonDetailsDto newPerson) {
-
-    }
 
 }

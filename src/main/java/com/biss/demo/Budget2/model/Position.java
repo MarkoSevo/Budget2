@@ -1,6 +1,7 @@
 package com.biss.demo.Budget2.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,7 +34,7 @@ public class Position {
     private String position;
 
     @ManyToMany(mappedBy = "positionList",fetch = FetchType.LAZY)
-    @JsonBackReference
+    //@JsonManagedReference
     private List<Person> personList;
 
     @ManyToMany(cascade = {
@@ -43,6 +44,6 @@ public class Position {
             joinColumns = @JoinColumn(name = "budget_id"),
             inverseJoinColumns = @JoinColumn(name = "position_id")
     )
-    @JsonBackReference
+    //@JsonManagedReference
     private List<Budget> budgetList;
 }

@@ -4,7 +4,6 @@ import com.biss.demo.Budget2.dto.PersonDetailsDto;
 import com.biss.demo.Budget2.model.HardwareTransaction;
 import com.biss.demo.Budget2.model.Person;
 import org.springframework.data.jpa.repository.Query;
-
 import java.util.List;
 
 public interface PersonDetailsService {
@@ -26,5 +25,5 @@ public interface PersonDetailsService {
     @Query(value = "SELECT SUM(INPUT_AMOUNT)-SUM(OUTPUT_AMOUNT) FROM BUDGET_TRANSACTION WHERE PERSON_ID = ?", nativeQuery = true)
     Long findRemainingAmount (Long id);
 
-    void save(PersonDetailsDto newPerson);
+    void save(PersonDetailsDto personDetailsDto);
 }

@@ -1,7 +1,6 @@
 package com.biss.demo.Budget2.controller;
 
 import com.biss.demo.Budget2.dto.HardwareDto;
-import com.biss.demo.Budget2.dto.PersonDto;
 import com.biss.demo.Budget2.model.Hardware;
 import com.biss.demo.Budget2.repository.HardwareJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

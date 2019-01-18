@@ -1,14 +1,11 @@
 package com.biss.demo.Budget2.controller;
 
-import com.biss.demo.Budget2.dto.PersonDto;
 import com.biss.demo.Budget2.dto.PositionDto;
-import com.biss.demo.Budget2.model.Person;
 import com.biss.demo.Budget2.model.Position;
 import com.biss.demo.Budget2.repository.PositionJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController
 @RequestMapping("/positions")

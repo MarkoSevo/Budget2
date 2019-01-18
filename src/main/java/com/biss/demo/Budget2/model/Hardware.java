@@ -1,6 +1,7 @@
 package com.biss.demo.Budget2.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -52,6 +53,6 @@ public class Hardware {
             joinColumns = @JoinColumn(name = "hardware_id"),
             inverseJoinColumns = @JoinColumn(name = "budget_transaction_id")
     )
-    @JsonBackReference
+    //@JsonManagedReference
     private List<BudgetTransaction> budgetTransactionList;
 }
