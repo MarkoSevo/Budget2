@@ -10,6 +10,6 @@ public class HardwareToHardwareDtoConverter implements Converter<Hardware, Hardw
 
     @Override
     public HardwareDto convert(Hardware source) {
-        return new HardwareDto(source.getId(),source.getVersion(),source.getSerialNumber(),source.getPrice(),source.getPurchaseDate(),source.getHardwareType());
+        return new HardwareDto(source.getId(),source.getVersion(),source.getSerialNumber(),source.getPrice(),source.getPurchaseDate(),source.getHardwareType(),null);
     }
 }

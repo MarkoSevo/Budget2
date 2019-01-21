@@ -11,8 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PositionDto {
-    @JsonIgnore
     private Long id;
-
     private String position;
 }

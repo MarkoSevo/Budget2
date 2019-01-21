@@ -15,6 +15,7 @@ public class HardwareTransactionController {
     private final HardwareTransactionJpaRepository jpaRepository;
     private final ConversionService conversionService;
 
+
     @Autowired
     public HardwareTransactionController(HardwareTransactionJpaRepository jpaRepository, ConversionService conversionService) {
         this.jpaRepository = jpaRepository;
@@ -26,11 +27,12 @@ public class HardwareTransactionController {
         return jpaRepository.save(conversionService.convert(newHardwareTransaction, HardwareTransaction.class));
     }
 
-    @GetMapping (value = "/id/{id}")
-    public HardwareTransactionDto getHardwareTransactionDto(final @PathVariable("id") Long id){
-        return conversionService.convert(jpaRepository.getOne(id), HardwareTransactionDto.class);
-    }
 }
+//    @GetMapping (value = "/id/{id}")
+//    public HardwareTransactionDto getHardwareTransactionDto(final @PathVariable("id") Long id){
+//        return conversionService.convert(jpaRepository.getOne(id), HardwareTransactionDto.class);
+//    }
+
 
 
 

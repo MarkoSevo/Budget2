@@ -14,4 +14,6 @@ public interface PositionJpaRepository extends JpaRepository<Position, Long> {
             "WHERE PERSON_ID = ?", nativeQuery = true)
     String findPersonDetailsByPersonId(String position);
 
+    Position findPositionByPosition (String position);
+
 }

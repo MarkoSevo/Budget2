@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class PersonDetailsServiceImpl implements PersonDetailsService {
-    
+
     private final BudgetJpaRepository budgetJpaRepository;
     private final PersonJpaRepository personJpaRepository;
     private final HardwareJpaRepository hardwareJpaRepository;
@@ -37,8 +37,9 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
         dto.setUserName(person.getUserName());
         dto.setPosition(positionJpaRepository.findPersonDetailsByPersonId(String.valueOf(person.getId())));
         dto.setRemainingBudget(budgetJpaRepository.findRemainingAmount(person.getId()));
-        dto.setInitialBudget(budgetJpaRepository.findInitialBudget(person.getId()));
+        dto.setInitialBudget(budgetJpaRepository.findInitialBudget(String.valueOf(person.getId())));
         dto.setHardwareTransactionList(hardwareTransactionJpaRepository.findHardwareTransactionsByPersonId(person.getId()));
+//        dto.setHardwareList(hardwareJpaRepository.findHardwaresByPersonId(person.getId()));
         return dto;
     }
 
@@ -52,21 +53,12 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
         dto.setUserName(person.getUserName());
         dto.setPosition(positionJpaRepository.findPersonDetailsByPersonId(String.valueOf(person.getId())));
         dto.setRemainingBudget(budgetJpaRepository.findRemainingAmount(person.getId()));
-       //dto.setInitialBudget(budgetJpaRepository.findFirstByAmount(person.getId()));
+        dto.setInitialBudget(budgetJpaRepository.findInitialBudget(String.valueOf(person.getId())));
         dto.setHardwareTransactionList(hardwareTransactionJpaRepository.findHardwareTransactionsByPersonId(person.getId()));
+        //  dto.setHardwareList(hardwareJpaRepository.findHardwaresByPersonId(person.getId()));
         return dto;
     }
 
-    @Override
-    public void save(PersonDetailsDto personDetailsDto) {
-    }
-
-    @Override
-    public PersonDetailsDto findBudgetById(Long id) {
-        Budget budget = budgetJpaRepository.findBudgetById(id);
-        PersonDetailsDto dto = new PersonDetailsDto();
-        return dto;
-    }
 
     @Override
     public PersonDetailsDto findHardwareById(Long id) {
@@ -74,16 +66,5 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
         PersonDetailsDto dto = new PersonDetailsDto();
         return dto;
     }
-
-    @Override
-    public List<HardwareTransaction> findHardwareTransactions(Long id) {
-       return null;
-    }
-
-    @Override
-    public Long findRemainingAmount(Long id) {
-        return null;
-    }
-
 
 }

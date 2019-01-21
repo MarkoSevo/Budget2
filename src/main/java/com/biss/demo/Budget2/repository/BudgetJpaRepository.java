@@ -13,11 +13,19 @@ public interface BudgetJpaRepository extends JpaRepository<Budget, Long> {
 
    Budget findBudgetById(Long id);
 
+//    @Query(value = "SELECT AMOUNT \n" +
+//            "FROM BUDGET\n" +
+//            "LEFT JOIN BUDGET_POSITION BP on BUDGET.ID = BP.BUDGET_ID\n" +
+//            "WHERE POSITION_ID = ?", nativeQuery = true)
+//    Long findInitialBudget (Long id);
+
     @Query(value = "SELECT AMOUNT \n" +
-            "FROM BUDGET\n" +
-            "LEFT JOIN BUDGET_POSITION BP on BUDGET.ID = BP.BUDGET_ID\n" +
-            "WHERE POSITION_ID = ?", nativeQuery = true)
-    Long findInitialBudget (Long id);
+            "FROM BUDGET \n" +
+            "JOIN BUDGET_POSITION BP on BUDGET.ID = BP.BUDGET_ID \n" +
+            "WHERE POSITION_ID = ?"
+            , nativeQuery = true)
+    String findInitialBudget (String id);
+
 
     Long findFirstByAmount(Long id);
 

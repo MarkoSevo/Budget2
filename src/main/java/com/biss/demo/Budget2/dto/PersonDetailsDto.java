@@ -18,7 +18,7 @@ public class PersonDetailsDto {
     private String lastName;
     private String email;
     private String userName;
-    private Long initialBudget;
+    private String initialBudget;
     private Long remainingBudget;
     private String position;
     private List<Hardware> hardwareList;
