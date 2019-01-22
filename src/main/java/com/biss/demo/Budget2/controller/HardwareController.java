@@ -1,9 +1,9 @@
 package com.biss.demo.Budget2.controller;
 
-import com.biss.demo.Budget2.dto.HardwareDto;
+import com.biss.demo.Budget2.dto.HardwareDetailsDto;
 import com.biss.demo.Budget2.model.Hardware;
 import com.biss.demo.Budget2.repository.HardwareJpaRepository;
-import com.biss.demo.Budget2.service.HardwareDtoService;
+import com.biss.demo.Budget2.service.HardwareDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.web.bind.annotation.*;
@@ -15,27 +15,24 @@ public class HardwareController {
 
     private final HardwareJpaRepository jpaRepository;
     private final ConversionService conversionService;
-    private final HardwareDtoService hardwareDtoService;
+    private final HardwareDetailsService hardwareDetailsService;
+
 
     @Autowired
-    public HardwareController(HardwareJpaRepository jpaRepository, ConversionService conversionService, HardwareDtoService hardwareDtoService) {
+    public HardwareController(HardwareJpaRepository jpaRepository, ConversionService conversionService, HardwareDetailsService hardwareDetailsService) {
         this.jpaRepository = jpaRepository;
         this.conversionService = conversionService;
-        this.hardwareDtoService = hardwareDtoService;
+        this.hardwareDetailsService = hardwareDetailsService;
     }
 
     @PostMapping (value = "/post/")
-    public Hardware save(@RequestBody HardwareDto newHardware){
+    public Hardware save(@RequestBody HardwareDetailsDto newHardware){
         return jpaRepository.save(conversionService.convert(newHardware, Hardware.class));
     }
 
-    @GetMapping(value = "/id/{id}")
-    public HardwareDto findHardwareByid(final @PathVariable("id") Long id) {
-        return hardwareDtoService.findHardwareById(id);
-    }
     @GetMapping (value = "/type/{type}")
-    public HardwareDto findHardwareByType (final @PathVariable ("type") Long hardwareType){
-        return conversionService.convert(jpaRepository.findAllByHardwareType(hardwareType), HardwareDto.class);
+    public HardwareDetailsDto findByType(final @PathVariable("type") String hardwareType) {
+        return hardwareDetailsService.findByHardwareType(hardwareType);
     }
 
     @DeleteMapping(value = "/id/{id}")
@@ -44,6 +41,11 @@ public class HardwareController {
     }
 }
 
+//
+//    @GetMapping (value = "/type/{type}")
+//    public HardwareDto findByType(final @PathVariable("type") String type){
+//        return hardwareDtoService.findAllByHardwareType(type);
+//    }
 
 //    @GetMapping(value = "/all")
 //    public List<Hardware> allHardwares() {
@@ -68,3 +70,7 @@ public class HardwareController {
 //    public HardwareDto getHardwareDto(final @PathVariable("id") Long id){
 //        return conversionService.convert(jpaRepository.findHardwareById(id), HardwareDto.class);
 //    }
+//@GetMapping (value = "/type/{type}")
+//public HardwareDto findHardwareByType (final @PathVariable ("type") Long hardwareType){
+//    return conversionService.convert(jpaRepository.findAllByHardwareType(hardwareType), HardwareDto.class);
+//}

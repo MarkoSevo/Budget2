@@ -40,7 +40,7 @@ public class Hardware {
     @JsonProperty("purchaseDate")
     private Date purchaseDate;
 
-    @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn (name = "hardware_type_id")
     private HardwareType hardwareType;
 

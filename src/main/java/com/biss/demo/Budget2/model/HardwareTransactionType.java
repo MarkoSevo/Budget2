@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.List;
 
 
 @Data
@@ -13,8 +14,8 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Hardware_transaction_type")
-public class HardwareTransactionType {
+@Table(name = "hardware_transaction_type")
+public class HardwareTransactionType  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
