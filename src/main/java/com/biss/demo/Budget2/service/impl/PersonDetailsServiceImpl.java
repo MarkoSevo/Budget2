@@ -7,6 +7,8 @@ import com.biss.demo.Budget2.service.PersonDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+
 
 @Service
 public class PersonDetailsServiceImpl implements PersonDetailsService {
@@ -15,14 +17,16 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
     private final PersonJpaRepository personJpaRepository;
     private final HardwareJpaRepository hardwareJpaRepository;
     private final PositionJpaRepository positionJpaRepository;
+    private final BudgetPositionJpaRepository budgetPositionJpaRepository;
     private final HardwareTransactionJpaRepository hardwareTransactionJpaRepository;
 
     @Autowired
-    public PersonDetailsServiceImpl(BudgetJpaRepository budgetJpaRepository, PersonJpaRepository personJpaRepository, HardwareJpaRepository hardwareJpaRepository, PositionJpaRepository positionJpaRepository, HardwareTransactionJpaRepository hardwareTransactionJpaRepository) {
+    public PersonDetailsServiceImpl(BudgetJpaRepository budgetJpaRepository, PersonJpaRepository personJpaRepository, HardwareJpaRepository hardwareJpaRepository, PositionJpaRepository positionJpaRepository, BudgetPositionJpaRepository budgetPositionJpaRepository, HardwareTransactionJpaRepository hardwareTransactionJpaRepository) {
         this.budgetJpaRepository = budgetJpaRepository;
         this.personJpaRepository = personJpaRepository;
         this.hardwareJpaRepository = hardwareJpaRepository;
         this.positionJpaRepository = positionJpaRepository;
+        this.budgetPositionJpaRepository = budgetPositionJpaRepository;
         this.hardwareTransactionJpaRepository = hardwareTransactionJpaRepository;
     }
 
@@ -36,9 +40,8 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
         dto.setUserName(person.getUserName());
         dto.setPosition(positionJpaRepository.findPersonDetailsByPersonId(String.valueOf(person.getId())));
         dto.setRemainingBudget(budgetJpaRepository.findRemainingAmount(person.getId()));
-        dto.setInitialBudget(budgetJpaRepository.findInitialBudget(String.valueOf(person.getId())));
-        dto.setHardwareTransactionList(hardwareTransactionJpaRepository.findHardwareTransactionsByPersonId(person.getId()));
-//        dto.setHardwareList(hardwareJpaRepository.findHardwaresByPersonId(person.getId()));
+        dto.setInitialBudget(budgetPositionJpaRepository.findByPosition_Id(person.getId()));
+        dto.setHardwareList(hardwareTransactionJpaRepository.findAllByPersonId(person.getId()));
         return dto;
     }
 
@@ -52,9 +55,8 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
         dto.setUserName(person.getUserName());
         dto.setPosition(positionJpaRepository.findPersonDetailsByPersonId(String.valueOf(person.getId())));
         dto.setRemainingBudget(budgetJpaRepository.findRemainingAmount(person.getId()));
-        dto.setInitialBudget(budgetJpaRepository.findInitialBudget(String.valueOf(person.getId())));
-        dto.setHardwareTransactionList(hardwareTransactionJpaRepository.findHardwareTransactionsByPersonId(person.getId()));
-        //  dto.setHardwareList(hardwareJpaRepository.findHardwaresByPersonId(person.getId()));
+        dto.setInitialBudget(budgetPositionJpaRepository.findByPosition_Id(person.getId()));
+        dto.setHardwareList(hardwareTransactionJpaRepository.findAllByPersonId(person.getId()));
         return dto;
     }
 

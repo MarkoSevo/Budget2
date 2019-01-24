@@ -1,6 +1,7 @@
 package com.biss.demo.Budget2.controller;
 
 import com.biss.demo.Budget2.dto.PersonDetailsDto;
+import com.biss.demo.Budget2.model.Person;
 import com.biss.demo.Budget2.repository.PersonJpaRepository;
 import com.biss.demo.Budget2.service.PersonDetailsService;
 import org.springframework.core.convert.ConversionService;
@@ -19,10 +20,12 @@ public class PersonDetailsController {
         this.conversionService = conversionService;
         this.personJpaRepository = personJpaRepository;
     }
-//    @PostMapping(value = "/post/")
-//    public PersonDetailsDto save(@RequestBody PersonDetailsDto newPerson) {
-//        return personDetailsService.;
-//    }
+    @PostMapping(value = "/post/")
+    public PersonDetailsDto save(@RequestBody Person newPerson) {
+       // return personJpaRepository.save(conversionService.convert(newPerson, Person.class));
+        return conversionService.convert(personJpaRepository.save(newPerson), PersonDetailsDto.class);
+    }
+
 
     @GetMapping (value = "/id/{id}")
     public PersonDetailsDto findById(final @PathVariable("id") Long id){

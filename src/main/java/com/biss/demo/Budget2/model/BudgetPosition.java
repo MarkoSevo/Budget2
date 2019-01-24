@@ -1,5 +1,6 @@
 package com.biss.demo.Budget2.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +12,7 @@ import java.util.Date;
 
 @Data
 @Entity
+@IdClass(BudgetPosition.class)
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

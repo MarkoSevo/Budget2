@@ -19,14 +19,12 @@ import java.util.Date;
 public class PersonPosition implements Serializable {
 
     @Id
-    @ManyToOne
-    @JoinColumn(name = "person_id")
-    private Person person;
+    @Column(name = "person_id")
+    private Long person;
 
     @Id
-    @ManyToOne
-    @JoinColumn(name = "position_id")
-    private Position position;
+    @Column(name = "position_id")
+    private Long position;
 
     @Version
     @JsonProperty("Version")

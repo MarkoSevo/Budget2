@@ -1,5 +1,6 @@
 package com.biss.demo.Budget2.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +15,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Position")
+@Table(name = "position")
 public class Position {
 
     @Id
@@ -31,17 +32,9 @@ public class Position {
     @JsonProperty("position")
     private String position;
 
-    @ManyToMany(mappedBy = "positionList",fetch = FetchType.LAZY)
-    //@JsonManagedReference
+    @ManyToMany(mappedBy = "positionList")
     private List<Person> personList;
 
-    @ManyToMany(cascade = {
-            CascadeType.ALL
-    })
-    @JoinTable(name = "budget_position",
-            joinColumns = @JoinColumn(name = "budget_id"),
-            inverseJoinColumns = @JoinColumn(name = "position_id")
-    )
-    //@JsonManagedReference
+    @ManyToMany(mappedBy = "positionList")
     private List<Budget> budgetList;
 }

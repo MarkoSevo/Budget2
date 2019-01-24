@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -15,7 +16,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "BUDGET")
+@Table(name = "budget")
 public class Budget{
 
     @Id
@@ -32,7 +33,13 @@ public class Budget{
     @JsonProperty("amount")
     private BigDecimal amount;
 
-    @ManyToMany(mappedBy = "budgetList")
-//    @JsonManagedReference
-    private List<Position> positionList;
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "budget_position",
+            joinColumns = @JoinColumn(name = "position_id"),
+            inverseJoinColumns = @JoinColumn(name = "budget_id")
+    )
+    private List<Position> positionList = new ArrayList<>();
 }

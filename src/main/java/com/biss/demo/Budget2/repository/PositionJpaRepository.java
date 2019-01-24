@@ -12,8 +12,7 @@ public interface PositionJpaRepository extends JpaRepository<Position, Long> {
             "FROM PERSON_POSITION \n" +
             "LEFT JOIN POSITION P on PERSON_POSITION.POSITION_ID = P.ID\n" +
             "WHERE PERSON_ID = ?", nativeQuery = true)
-    String findPersonDetailsByPersonId(String position);
+    Position findPersonDetailsByPersonId(String position);
 
     Position findPositionByPosition (String position);
-
 }

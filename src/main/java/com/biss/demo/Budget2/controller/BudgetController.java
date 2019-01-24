@@ -1,12 +1,16 @@
 package com.biss.demo.Budget2.controller;
 
 import com.biss.demo.Budget2.dto.BudgetDto;
+import com.biss.demo.Budget2.dto.PositionDto;
 import com.biss.demo.Budget2.model.Budget;
+import com.biss.demo.Budget2.model.Position;
 import com.biss.demo.Budget2.repository.BudgetJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 
 @RestController
@@ -37,14 +41,10 @@ public class BudgetController {
         return conversionService.convert(jpaRepository.findBudgetByAmount(amount), BudgetDto.class);
     }
 
-    @GetMapping(value = "/all")
-    public BudgetDto allBudgets() {
-        return conversionService.convert(jpaRepository.findAll(), BudgetDto.class);
-    }
-
-    @DeleteMapping(value = "/id/{id}")
-    public void delete(@PathVariable("id") Long id) {
-        jpaRepository.deleteById(id);
+    @GetMapping (value = "/all")
+    public List<BudgetDto> findALL() {
+        return (List<BudgetDto>) conversionService.convert(jpaRepository.findAll(), TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(Budget.class)),
+                TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(BudgetDto.class)));
     }
 
 }

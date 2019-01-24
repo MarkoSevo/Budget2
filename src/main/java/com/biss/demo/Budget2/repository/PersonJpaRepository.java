@@ -1,5 +1,6 @@
 package com.biss.demo.Budget2.repository;
 
+import com.biss.demo.Budget2.model.Hardware;
 import com.biss.demo.Budget2.model.Person;
 import com.biss.demo.Budget2.model.Position;
 import org.springframework.data.jpa.repository.JpaRepository;

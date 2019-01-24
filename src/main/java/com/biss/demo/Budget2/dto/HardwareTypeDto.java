@@ -1,5 +1,6 @@
 package com.biss.demo.Budget2.dto;
 
+import com.biss.demo.Budget2.model.Hardware;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,4 +18,6 @@ public class HardwareTypeDto {
     private Long id;
 
     private String type;
+
+    private Hardware hardware;
 }

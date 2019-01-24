@@ -36,13 +36,12 @@ public class PositionDtoServiceImpl implements PositionDtoService {
     }
 
     @Override
-    public List<PositionDto> findAll(Long position) {
-        return null;
+    public List<Position> findAll(Long position) {
+        return positionJpaRepository.findAll();
     }
 
     @Override
     public Position save(Position newPosition) {
-
         return positionJpaRepository.save(newPosition);
     }
 

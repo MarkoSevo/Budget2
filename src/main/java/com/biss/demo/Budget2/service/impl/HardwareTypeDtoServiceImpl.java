@@ -17,19 +17,13 @@
 //        this.hardwareTypeJpaRepository = hardwareTypeJpaRepository;
 //    }
 //
+//
 //    @Override
-//    public HardwareTypeDto findHardwareByType(String type) {
-//        Long hardwareType = hardwareTypeJpaRepository.findByType(type);
+//    public HardwareType findHardwareByHardwareType_Type(String type) {
 //        HardwareTypeDto dto = new HardwareTypeDto();
-//        dto.setType(hardwareType);
-//        return dto;
+//        Hardware hardwareType = hardwareTypeJpaRepository.findHardwareByHardwareType_Type(type);
+//        dto.setType(String.valueOf(hardwareTypeJpaRepository.findHardwareByHardwareType_Type(type)));
+//        dto.setId(type.);
+//        return null;
 //    }
 //}
-////    @Override
-////    public HardwareDetailsDto findHardwareById(Long id) {
-////        Hardware hardware = hardwareJpaRepository.getOne(id);
-////        HardwareDetailsDto dto = new HardwareDetailsDto();
-////        dto.setPrice(hardware.getPrice());
-////        dto.setSerialNumber(hardware.getSerialNumber());
-////        return dto;
-////    }

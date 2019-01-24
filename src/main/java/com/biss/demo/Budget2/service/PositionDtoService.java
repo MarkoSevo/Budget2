@@ -11,7 +11,7 @@ public interface PositionDtoService {
 
     PositionDto findPositionById (Long id);
 
-    List<PositionDto> findAll (Long position);
+    List<Position> findAll (Long position);
 
     Position save(Position newPosition);
 

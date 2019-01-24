@@ -1,6 +1,8 @@
 package com.biss.demo.Budget2.dto;
 
+
 import com.biss.demo.Budget2.model.BudgetPosition;
+import com.biss.demo.Budget2.model.Position;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,6 +25,5 @@ public class BudgetDto {
 
     private BigDecimal amount;
 
-    @JsonIgnore
-    private List<BudgetPosition> budgetPositionList;
+    private List<Position> positionList;
 }

@@ -10,6 +10,6 @@ public class BudgetDtoToBudgetConverter implements Converter<BudgetDto, Budget> 
 
     @Override
     public Budget convert(BudgetDto source) {
-        return new Budget(source.getId(),source.getVersion(),source.getAmount(),null);
+        return new Budget(source.getId(),source.getVersion(),source.getAmount(),source.getPositionList());
     }
 }

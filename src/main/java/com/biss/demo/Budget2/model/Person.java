@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -13,7 +14,10 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table
+@Table(name = "person")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Person {
 
     @Id
@@ -42,11 +46,14 @@ public class Person {
     @JsonProperty("userName")
     private String userName;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
     @JoinTable(name = "person_position",
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "position_id")
     )
-    private List<Position> positionList;
+    private List<Position> positionList = new ArrayList<>();
 
 }

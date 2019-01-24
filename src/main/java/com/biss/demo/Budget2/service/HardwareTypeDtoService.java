@@ -1,8 +1,9 @@
 package com.biss.demo.Budget2.service;
 
 import com.biss.demo.Budget2.dto.HardwareTypeDto;
+import com.biss.demo.Budget2.model.HardwareType;
 
 public interface HardwareTypeDtoService {
 
-    HardwareTypeDto findHardwareByType (String type);
+    HardwareType findHardwareByHardwareType_Type (final String type);
 }

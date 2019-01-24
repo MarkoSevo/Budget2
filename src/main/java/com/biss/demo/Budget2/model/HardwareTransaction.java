@@ -1,6 +1,7 @@
 package com.biss.demo.Budget2.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,12 +35,12 @@ public class HardwareTransaction {
 
     @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn (name = "person_id")
-    @JsonBackReference(value = "person")
+    @JsonIgnore
     private Person person;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "hardware_id")
-    @JsonBackReference
+    @JsonIgnore
     private Hardware hardware;
 
     @ManyToOne (fetch = FetchType.LAZY)
