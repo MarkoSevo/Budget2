@@ -32,9 +32,11 @@ public class Position {
     @JsonProperty("position")
     private String position;
 
-    @ManyToMany(mappedBy = "positionList")
-    private List<Person> personList;
-
-    @ManyToMany(mappedBy = "positionList")
-    private List<Budget> budgetList;
+//    @ManyToMany(mappedBy = "position")
+//    @JsonBackReference
+//    private Person person;
+//
+//    @ManyToMany(mappedBy = "position")
+//    @JsonBackReference
+//    private Budget budget;
 }

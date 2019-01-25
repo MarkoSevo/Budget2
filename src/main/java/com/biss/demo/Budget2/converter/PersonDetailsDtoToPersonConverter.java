@@ -11,6 +11,6 @@ import java.util.Collections;
 public class PersonDetailsDtoToPersonConverter implements Converter<PersonDetailsDto, Person> {
     @Override
     public Person convert(PersonDetailsDto source) {
-        return new Person(null,null, source.getFirstName(),source.getLastName(), source.getEmail(),source.getUserName(), Collections.singletonList(source.getPosition()));
+        return new Person(null,null, source.getFirstName(),source.getLastName(), source.getEmail(),source.getUserName());
     }
 }

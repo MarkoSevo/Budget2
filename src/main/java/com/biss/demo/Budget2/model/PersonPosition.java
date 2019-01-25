@@ -10,25 +10,23 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@Entity
 @Builder
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@IdClass(value = PersonPosition.class)
 @Table(name = "person_position")
-
 public class PersonPosition implements Serializable {
 
     @Id
-    @Column(name = "person_id")
-    private Long person;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "person_id")
+    private Person person;
 
     @Id
-    @Column(name = "position_id")
-    private Long position;
-
-    @Version
-    @JsonProperty("Version")
-    private Long version;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "position_id")
+    private Position position;
 
     @Column (name = "valid_to",columnDefinition="DATE")
     @JsonProperty ("Valid to")

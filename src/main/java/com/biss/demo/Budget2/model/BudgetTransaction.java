@@ -47,9 +47,8 @@ public class BudgetTransaction {
     @JsonIgnore
     private Person person;
 
-    @ManyToMany(mappedBy = "budgetTransactionList")
-    @JsonIgnore
-    private List<Hardware> hardwareList;
+//    @ManyToMany(mappedBy = "budgetTransactionList")
+//    private List<Hardware> hardwareList;
 }
 
 

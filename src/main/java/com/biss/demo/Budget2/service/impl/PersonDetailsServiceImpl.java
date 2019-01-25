@@ -5,9 +5,12 @@ import com.biss.demo.Budget2.model.*;
 import com.biss.demo.Budget2.repository.*;
 import com.biss.demo.Budget2.service.PersonDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -19,15 +22,17 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
     private final PositionJpaRepository positionJpaRepository;
     private final BudgetPositionJpaRepository budgetPositionJpaRepository;
     private final HardwareTransactionJpaRepository hardwareTransactionJpaRepository;
+    private final ConversionService conversionService;
 
     @Autowired
-    public PersonDetailsServiceImpl(BudgetJpaRepository budgetJpaRepository, PersonJpaRepository personJpaRepository, HardwareJpaRepository hardwareJpaRepository, PositionJpaRepository positionJpaRepository, BudgetPositionJpaRepository budgetPositionJpaRepository, HardwareTransactionJpaRepository hardwareTransactionJpaRepository) {
+    public PersonDetailsServiceImpl(BudgetJpaRepository budgetJpaRepository, PersonJpaRepository personJpaRepository, HardwareJpaRepository hardwareJpaRepository, PositionJpaRepository positionJpaRepository, BudgetPositionJpaRepository budgetPositionJpaRepository, HardwareTransactionJpaRepository hardwareTransactionJpaRepository, ConversionService conversionService) {
         this.budgetJpaRepository = budgetJpaRepository;
         this.personJpaRepository = personJpaRepository;
         this.hardwareJpaRepository = hardwareJpaRepository;
         this.positionJpaRepository = positionJpaRepository;
         this.budgetPositionJpaRepository = budgetPositionJpaRepository;
         this.hardwareTransactionJpaRepository = hardwareTransactionJpaRepository;
+        this.conversionService = conversionService;
     }
 
     @Override
@@ -41,7 +46,7 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
         dto.setPosition(positionJpaRepository.findPersonDetailsByPersonId(String.valueOf(person.getId())));
         dto.setRemainingBudget(budgetJpaRepository.findRemainingAmount(person.getId()));
         dto.setInitialBudget(budgetPositionJpaRepository.findByPosition_Id(person.getId()));
-        dto.setHardwareList(hardwareTransactionJpaRepository.findAllByPersonId(person.getId()));
+        dto.setHardwareList(hardwareTransactionJpaRepository.findAllByPerson_Id(person.getId()));
         return dto;
     }
 
@@ -56,9 +61,11 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
         dto.setPosition(positionJpaRepository.findPersonDetailsByPersonId(String.valueOf(person.getId())));
         dto.setRemainingBudget(budgetJpaRepository.findRemainingAmount(person.getId()));
         dto.setInitialBudget(budgetPositionJpaRepository.findByPosition_Id(person.getId()));
-        dto.setHardwareList(hardwareTransactionJpaRepository.findAllByPersonId(person.getId()));
+        dto.setHardwareList(hardwareTransactionJpaRepository.findAllByPerson_Id(person.getId()));
         return dto;
     }
+
+
 
 
     @Override

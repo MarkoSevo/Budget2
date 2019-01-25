@@ -33,13 +33,13 @@ public class Budget{
     @JsonProperty("amount")
     private BigDecimal amount;
 
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    @JoinTable(name = "budget_position",
-            joinColumns = @JoinColumn(name = "position_id"),
-            inverseJoinColumns = @JoinColumn(name = "budget_id")
-    )
-    private List<Position> positionList = new ArrayList<>();
+//    @ManyToMany(cascade = {
+//            CascadeType.PERSIST,
+//            CascadeType.MERGE
+//    })
+//    @JoinTable(name = "budget_position",
+//            joinColumns = @JoinColumn(name = "position_id"),
+//            inverseJoinColumns = @JoinColumn(name = "budget_id")
+//    )
+//    private List<Position> positionList = new ArrayList<>();
 }

@@ -17,7 +17,6 @@ import java.util.List;
 @AllArgsConstructor
 public class BudgetDto {
 
-    @JsonIgnore
     private Long id;
 
     @JsonIgnore
@@ -25,5 +24,6 @@ public class BudgetDto {
 
     private BigDecimal amount;
 
+    @JsonIgnore
     private List<Position> positionList;
 }

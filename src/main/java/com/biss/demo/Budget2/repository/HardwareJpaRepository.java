@@ -17,6 +17,4 @@ public interface HardwareJpaRepository extends JpaRepository<Hardware, Long> {
     List<Hardware> findAllByHardwareType_Type (final String type);
 
     Hardware findHardwareByHardwareType_Type (final String type);
-
-
 }

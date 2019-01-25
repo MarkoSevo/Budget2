@@ -5,7 +5,10 @@ import com.biss.demo.Budget2.model.Person;
 import com.biss.demo.Budget2.repository.PersonJpaRepository;
 import com.biss.demo.Budget2.service.PersonDetailsService;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/persondetails")
@@ -20,12 +23,10 @@ public class PersonDetailsController {
         this.conversionService = conversionService;
         this.personJpaRepository = personJpaRepository;
     }
-    @PostMapping(value = "/post/")
-    public PersonDetailsDto save(@RequestBody Person newPerson) {
-       // return personJpaRepository.save(conversionService.convert(newPerson, Person.class));
-        return conversionService.convert(personJpaRepository.save(newPerson), PersonDetailsDto.class);
-    }
-
+//    @PostMapping(value = "/post/")
+//    public PersonDetailsDto save(@RequestBody PersonDetailsDto newPerson) {
+//        return personDetailsService.;
+//    }
 
     @GetMapping (value = "/id/{id}")
     public PersonDetailsDto findById(final @PathVariable("id") Long id){
@@ -40,5 +41,10 @@ public class PersonDetailsController {
     @GetMapping (value = "/hardwareid/{hardwareid}")
     public PersonDetailsDto findByHardwareId(final @PathVariable("hardwareid") Long hardwareid){
         return personDetailsService.findHardwareById(hardwareid);
+    }
+    @GetMapping(value = "/all")
+    public List<PersonDetailsDto> findALL() {
+        return (List<PersonDetailsDto>) conversionService.convert(personJpaRepository.findAll(), TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(Person.class)),
+                TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(PersonDetailsDto.class)));
     }
 }

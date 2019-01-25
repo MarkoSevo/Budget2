@@ -35,12 +35,10 @@ public class HardwareTransaction {
 
     @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn (name = "person_id")
-    @JsonIgnore
     private Person person;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "hardware_id")
-    @JsonIgnore
     private Hardware hardware;
 
     @ManyToOne (fetch = FetchType.LAZY)

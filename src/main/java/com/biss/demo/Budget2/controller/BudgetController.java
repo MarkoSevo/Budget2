@@ -26,7 +26,7 @@ public class BudgetController {
         this.conversionService = conversionService;
     }
 
-    @PostMapping (value = "/newbudget/post/")
+    @PostMapping (value = "/post")
     public Budget save(@RequestBody BudgetDto amount){
         return jpaRepository.save(conversionService.convert(amount, Budget.class));
     }

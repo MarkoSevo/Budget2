@@ -44,7 +44,6 @@ public class Hardware {
 
     @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn (name = "hardware_type_id")
-    @JsonIgnore
     private HardwareType hardwareType;
 
     @ManyToMany(cascade = {

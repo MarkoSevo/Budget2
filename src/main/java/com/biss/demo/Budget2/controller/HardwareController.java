@@ -32,7 +32,7 @@ public class HardwareController {
         this.hardwareDetailsService = hardwareDetailsService;
     }
 
-    @PostMapping(value = "/post/")
+    @PostMapping(value = "/post")
     public Hardware save(@RequestBody HardwareDetailsDto newHardware) {
         return hardwareJpaRepository.save(conversionService.convert(newHardware, Hardware.class));
     }
