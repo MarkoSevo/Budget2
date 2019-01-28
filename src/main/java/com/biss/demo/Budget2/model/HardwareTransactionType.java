@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -30,4 +31,12 @@ public class HardwareTransactionType  {
     @Column(name = "type")
     @JsonProperty("type")
     private String type;
+
+    @OneToMany(
+            mappedBy = "hardwareTransactionType",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<HardwareTransaction> comments = new ArrayList<>();
+
 }

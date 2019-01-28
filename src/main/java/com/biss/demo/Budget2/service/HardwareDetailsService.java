@@ -6,4 +6,6 @@ public interface HardwareDetailsService {
 
     HardwareDetailsDto findByHardwareType (String hardwareType);
 
+    HardwareDetailsDto save(HardwareDetailsDto hardwareDetailsDto);
+
 }

@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -33,13 +35,21 @@ public class Budget{
     @JsonProperty("amount")
     private BigDecimal amount;
 
+    @ManyToMany(cascade = {
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "budget_position",
+            joinColumns = @JoinColumn(name = "budget_id"),
+            inverseJoinColumns = @JoinColumn(name = "position_id")
+    )
+    private Set<Position> positionList;
+}
 //    @ManyToMany(cascade = {
-//            CascadeType.PERSIST,
 //            CascadeType.MERGE
 //    })
-//    @JoinTable(name = "budget_position",
-//            joinColumns = @JoinColumn(name = "position_id"),
-//            inverseJoinColumns = @JoinColumn(name = "budget_id")
+//    @JoinTable(name = "person_position",
+//            joinColumns = @JoinColumn(name = "person_id"),
+//            inverseJoinColumns = @JoinColumn(name = "position_id")
 //    )
-//    private List<Position> positionList = new ArrayList<>();
-}
+//    @Column(insertable = false, updatable = false)
+//    private Set<Position> positionList;

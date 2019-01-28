@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.lang.reflect.Member;
 import java.util.Date;
 
 @Data
@@ -18,16 +19,6 @@ import java.util.Date;
 @Table(name = "person_position")
 public class PersonPosition implements Serializable {
 
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "person_id")
-    private Person person;
-
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "position_id")
-    private Position position;
-
     @Column (name = "valid_to",columnDefinition="DATE")
     @JsonProperty ("Valid to")
     private Date validTo;
@@ -35,4 +26,24 @@ public class PersonPosition implements Serializable {
     @Column (name = "valid_from",columnDefinition="DATE")
     @JsonProperty ("Valid from")
     private Date validFrom;
+
+    @Id
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "person_id")
+    private Person person;
+
+    @Id
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "position_id")
+    private Position position;
 }
+
+//    @Id
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn (name = "person_id")
+//    private Person person;
+//
+//    @Id
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn (name = "position_id")
+//    private Position position;

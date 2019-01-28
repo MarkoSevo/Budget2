@@ -28,5 +28,6 @@ public class HardwareDto {
     private Date purchaseDate;
     private Long hardwareType;
 
+    @JsonIgnore
     private HardwareTransactionType hardwareTransactionType;
 }

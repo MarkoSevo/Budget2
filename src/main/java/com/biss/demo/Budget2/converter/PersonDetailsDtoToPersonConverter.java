@@ -5,12 +5,12 @@ import com.biss.demo.Budget2.model.Person;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 
 @Component
 public class PersonDetailsDtoToPersonConverter implements Converter<PersonDetailsDto, Person> {
     @Override
     public Person convert(PersonDetailsDto source) {
-        return new Person(null,null, source.getFirstName(),source.getLastName(), source.getEmail(),source.getUserName());
+        return new Person(null,null, source.getFirstName(),source.getLastName(), source.getEmail()
+                ,source.getUserName(),source.getPositionList(),null,null);
     }
 }

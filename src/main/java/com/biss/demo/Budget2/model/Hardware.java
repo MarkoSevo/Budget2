@@ -1,14 +1,13 @@
 package com.biss.demo.Budget2.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +17,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+        property  = "id",
+        scope     = Long.class)
 public class Hardware {
 
     @Id
@@ -42,10 +44,6 @@ public class Hardware {
     @JsonProperty("purchaseDate")
     private Date purchaseDate;
 
-    @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn (name = "hardware_type_id")
-    private HardwareType hardwareType;
-
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
@@ -54,5 +52,16 @@ public class Hardware {
             joinColumns = @JoinColumn(name = "hardware_id"),
             inverseJoinColumns = @JoinColumn(name = "budget_transaction_id")
     )
-    private List<BudgetTransaction> budgetTransactionList;
+    private List<BudgetTransaction> budgetTransactionList = new ArrayList<>();
+
+    @OneToMany(
+            mappedBy = "hardware",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<HardwareTransaction> hardwareTransactionList = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "hardware_type_id",nullable = false)
+    private HardwareType hardwareType;
 }

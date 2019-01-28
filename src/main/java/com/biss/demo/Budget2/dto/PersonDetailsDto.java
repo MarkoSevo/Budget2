@@ -8,7 +8,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -21,9 +23,9 @@ public class PersonDetailsDto {
     private String lastName;
     private String email;
     private String userName;
+    private Set<Position> positionList;
     private BigDecimal initialBudget;
     private BigDecimal remainingBudget;
-    private String position;
     private List<Hardware> hardwareList;
 
     @JsonIgnore
@@ -31,7 +33,4 @@ public class PersonDetailsDto {
 
     @JsonIgnore
     private List<HardwareTransaction> hardwareTransactionList;
-//
-//    @JsonIgnore
-//    private List<PersonPosition> personPositionList;
 }

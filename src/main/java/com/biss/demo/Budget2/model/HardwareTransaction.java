@@ -33,15 +33,15 @@ public class HardwareTransaction {
     @JsonProperty("transactionDate")
     private Date transactionDate;
 
-    @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn (name = "person_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "person_id")
     private Person person;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "hardware_id")
-    private Hardware hardware;
-
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "hardware_transaction_type_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hardware_transaction_type_id")
     private HardwareTransactionType hardwareTransactionType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hardware_id")
+    private Hardware hardware;
 }

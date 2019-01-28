@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,13 +43,13 @@ public class BudgetTransaction {
     @JsonProperty("transactionDate")
     private Date transactionDate;
 
-    @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn (name = "person_id")
-    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "person_id")
     private Person person;
 
-//    @ManyToMany(mappedBy = "budgetTransactionList")
-//    private List<Hardware> hardwareList;
+    @ManyToMany(mappedBy = "budgetTransactionList")
+    private List<Hardware> hardwareList = new ArrayList<>();
+
 }
 
 

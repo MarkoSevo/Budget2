@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 public class HardwareTransactionToHardwareTransactionDto implements Converter<HardwareTransaction, HardwareTransactionDto> {
     @Override
     public HardwareTransactionDto convert(HardwareTransaction source) {
-        return new HardwareTransactionDto(source.getId(),source.getVersion(),source.getTransactionDate(),null,source.getHardware(),source.getHardwareTransactionType());
+        return new HardwareTransactionDto(source.getId(),source.getVersion(),source.getTransactionDate(),null,null,null);
     }
 }

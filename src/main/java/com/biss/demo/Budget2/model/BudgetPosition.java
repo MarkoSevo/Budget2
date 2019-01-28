@@ -19,16 +19,6 @@ import java.util.Date;
 @Table(name = "budget_position")
 public class BudgetPosition implements Serializable {
 
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "budget_id")
-    private Budget budget;
-
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "position_id")
-    private Position position;
-
     @Column (name = "valid_to",columnDefinition="DATE")
     @JsonProperty ("Valid to")
     private Date validTo;
@@ -36,4 +26,14 @@ public class BudgetPosition implements Serializable {
     @Column (name = "valid_from",columnDefinition="DATE")
     @JsonProperty ("Valid from")
     private Date validFrom;
+
+    @Id
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "budget_id")
+    private Budget budget;
+
+    @Id
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "position_id")
+    private Position position;
 }

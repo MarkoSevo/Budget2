@@ -7,7 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -42,15 +44,35 @@ public class Person {
     @Column(name = "username")
     @JsonProperty("userName")
     private String userName;
-
-//    @ManyToMany(cascade = {
-//            CascadeType.PERSIST,
-//            CascadeType.MERGE
-//    })
-//    @JoinTable(name = "person_position",
-//            joinColumns = @JoinColumn(name = "person_id"),
-//            inverseJoinColumns = @JoinColumn(name = "position_id")
+//
+//    @OneToMany(
+//            mappedBy = "person",
+//            cascade = CascadeType.ALL
 //    )
-//    private List<Position> positionList = new ArrayList<>();
+//    private List<PersonPosition> personPositionList = new ArrayList<>();
 
+    @ManyToMany(cascade = {
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "person_position",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "position_id")
+    )
+    @Column(insertable = false, updatable = false)
+    private Set<Position> positionList;
+
+    @OneToMany(
+            mappedBy = "person",
+            cascade = CascadeType.MERGE,
+            orphanRemoval = true
+    )
+    @Column(insertable = false, updatable = false)
+    private Set<BudgetTransaction> budgetTransactionList = new HashSet<>();
+
+    @OneToMany(
+            mappedBy = "person",
+            cascade = CascadeType.MERGE,
+            orphanRemoval = true
+    )
+    private Set<HardwareTransaction> hardwareTransactionList = new HashSet<>();
 }

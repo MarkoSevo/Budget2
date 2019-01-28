@@ -1,7 +1,6 @@
 package com.biss.demo.Budget2.controller;
 
 import com.biss.demo.Budget2.dto.PersonDetailsDto;
-import com.biss.demo.Budget2.dto.PersonDto;
 import com.biss.demo.Budget2.model.Person;
 import com.biss.demo.Budget2.repository.PersonJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +22,8 @@ public class PersonController {
     }
 
     @PostMapping(value = "/post/")
-    public Person save(@RequestBody PersonDto newPerson) {
-        return jpaRepository.save(conversionService.convert(newPerson, Person.class));
+    public Person save(@RequestBody PersonDetailsDto newPerson) {
+        return jpaRepository.saveAndFlush(conversionService.convert(newPerson, Person.class));
     }
 
     @GetMapping(value = "/id/{id}")
