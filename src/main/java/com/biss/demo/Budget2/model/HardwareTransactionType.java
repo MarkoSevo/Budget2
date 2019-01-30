@@ -1,5 +1,7 @@
 package com.biss.demo.Budget2.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,10 +24,12 @@ public class HardwareTransactionType  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     @JsonProperty("id")
+    @JsonIgnore
     private Long id;
 
     @Version
     @JsonProperty("version")
+    @JsonIgnore
     private Long version;
 
     @Column(name = "type")
@@ -37,6 +41,7 @@ public class HardwareTransactionType  {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    @JsonIgnore
     private List<HardwareTransaction> comments = new ArrayList<>();
 
 }

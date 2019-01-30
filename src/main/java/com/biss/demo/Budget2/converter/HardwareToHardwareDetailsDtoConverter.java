@@ -2,7 +2,6 @@ package com.biss.demo.Budget2.converter;
 
 import com.biss.demo.Budget2.dto.HardwareDetailsDto;
 import com.biss.demo.Budget2.model.Hardware;
-import com.biss.demo.Budget2.model.HardwareType;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +10,6 @@ public class HardwareToHardwareDetailsDtoConverter implements Converter<Hardware
 
     @Override
     public HardwareDetailsDto convert(Hardware source) {
-        return new HardwareDetailsDto(source.getId(), source.getHardwareType(),source.getPrice(),source.getSerialNumber(),null);
+        return new HardwareDetailsDto(source.getId(),source.getPrice(),source.getSerialNumber(),null);
     }
 }

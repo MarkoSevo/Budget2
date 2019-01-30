@@ -1,5 +1,7 @@
 package com.biss.demo.Budget2.dto;
 
+import com.biss.demo.Budget2.model.Person;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,9 +14,9 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BudgetTransactionDto {
-    private Long id;
-    private Long personId;
+
     private BigDecimal inputAmount;
     private BigDecimal outputAmount;
     private Date transactionDate;
+    private PersonDetailsDto personDto;
 }

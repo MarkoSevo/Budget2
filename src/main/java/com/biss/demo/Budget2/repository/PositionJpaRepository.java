@@ -15,6 +15,7 @@ public interface PositionJpaRepository extends JpaRepository<Position, Long> {
 //    String findPersonDetailsByPersonId(String position);
 
     Position findPositionByPosition (String position);
+
 }
 
 

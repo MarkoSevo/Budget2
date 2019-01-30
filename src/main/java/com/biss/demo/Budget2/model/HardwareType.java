@@ -1,9 +1,6 @@
 package com.biss.demo.Budget2.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -42,7 +39,7 @@ public class HardwareType {
             mappedBy = "hardwareType",fetch = FetchType.EAGER,
             cascade = CascadeType.MERGE
     )
-    @JsonBackReference
+    @JsonManagedReference
     private List<Hardware> hardwareList = new ArrayList<>();
 }
 

@@ -26,6 +26,7 @@ public class PositionController {
         this.conversionService = conversionService;
         this.positionDtoService = positionDtoService;
     }
+
     @PostMapping(value = "/post/")
     public Position savePosition(@RequestBody Position newPosition) {
         return positionDtoService.save(newPosition);
@@ -35,16 +36,17 @@ public class PositionController {
     public PositionDto getPositionById(final @PathVariable("id") Long id) {
         return positionDtoService.findPositionById(id);
     }
+
     @GetMapping(value = "/{position}")
     public PositionDto getPositionByName(final @PathVariable("position") String position) {
         return positionDtoService.findPositionByPosition(position);
     }
 
-    @GetMapping (value = "/all")
-    public List<PositionDto> findALL(){
-        return (List<PositionDto>) conversionService.convert(positionJpaRepository.findAll(), TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(Position.class)),
-                TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(PositionDto.class)));
-    }}
+    @GetMapping(value = "/all")
+    public List<PositionDto> findAll() {
+        return positionDtoService.findAll();
+    }
+}
 
 //    @GetMapping (value = "/id/{id}")
 //    public PersonDetailsDto findById(final @PathVariable("id") Long id){

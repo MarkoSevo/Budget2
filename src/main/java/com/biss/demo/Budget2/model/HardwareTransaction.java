@@ -23,25 +23,29 @@ public class HardwareTransaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     @JsonProperty("id")
+    @JsonIgnore
     private Long id;
 
     @Version
     @JsonProperty("version")
+    @JsonIgnore
     private Long version;
 
     @Column(name = "transaction_date",columnDefinition="DATE")
     @JsonProperty("transactionDate")
     private Date transactionDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "person_id")
+    @JsonBackReference("person")
     private Person person;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "hardware_transaction_type_id")
+    @JsonIgnore
     private HardwareTransactionType hardwareTransactionType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "hardware_id")
     private Hardware hardware;
 }

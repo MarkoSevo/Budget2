@@ -1,5 +1,7 @@
 package com.biss.demo.Budget2.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.lang.reflect.Member;
 import java.util.Date;
 
 @Data
@@ -28,12 +29,12 @@ public class PersonPosition implements Serializable {
     private Date validFrom;
 
     @Id
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "person_id")
     private Person person;
 
     @Id
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "position_id")
     private Position position;
 }

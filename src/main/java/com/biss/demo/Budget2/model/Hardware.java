@@ -1,5 +1,6 @@
 package com.biss.demo.Budget2.model;
 
+import com.biss.demo.Budget2.dto.HardwareDetailsDto;
 import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -52,6 +53,7 @@ public class Hardware {
             joinColumns = @JoinColumn(name = "hardware_id"),
             inverseJoinColumns = @JoinColumn(name = "budget_transaction_id")
     )
+    @JsonBackReference
     private List<BudgetTransaction> budgetTransactionList = new ArrayList<>();
 
     @OneToMany(
@@ -59,9 +61,10 @@ public class Hardware {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    @JsonIgnore
     private List<HardwareTransaction> hardwareTransactionList = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "hardware_type_id",nullable = false)
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "hardware_type_id")
     private HardwareType hardwareType;
 }

@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 public class HardwareTypeToHardwareTypeDto implements Converter<HardwareType, HardwareTypeDto> {
     @Override
     public HardwareTypeDto convert(HardwareType source) {
-        return new HardwareTypeDto(source.getId(),source.getType(),null);
+        return new HardwareTypeDto(source.getId(),source.getType());
     }
 }

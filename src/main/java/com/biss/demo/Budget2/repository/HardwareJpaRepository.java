@@ -12,9 +12,9 @@ import java.util.List;
 public interface HardwareJpaRepository extends JpaRepository<Hardware, Long> {
     Hardware findHardwareById(final Long id);
 
-    List<Hardware> findAllByHardwareType_Id (final Long typeId);
-
     List<Hardware> findAllByHardwareType_Type (final String type);
 
     Hardware findHardwareByHardwareType_Type (final String type);
+
+    List<Hardware> findAllByHardwareType_Id (final Long id);
 }

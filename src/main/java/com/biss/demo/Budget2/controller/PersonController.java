@@ -1,8 +1,8 @@
 package com.biss.demo.Budget2.controller;
 
 import com.biss.demo.Budget2.dto.PersonDetailsDto;
-import com.biss.demo.Budget2.model.Person;
 import com.biss.demo.Budget2.repository.PersonJpaRepository;
+import com.biss.demo.Budget2.service.impl.PersonDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.web.bind.annotation.*;
@@ -12,29 +12,41 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/persons")
 public class PersonController {
 
-    private final PersonJpaRepository jpaRepository;
+    private final PersonJpaRepository personJpaRepository;
     private final ConversionService conversionService;
+    private final PersonDetailsServiceImpl personDetailsService;
 
     @Autowired
-    PersonController(PersonJpaRepository jpaRepository, ConversionService conversionService) {
-        this.jpaRepository = jpaRepository;
+    PersonController(PersonJpaRepository personJpaRepository, ConversionService conversionService,PersonDetailsServiceImpl personDetailsService) {
+        this.personJpaRepository = personJpaRepository;
         this.conversionService = conversionService;
+        this.personDetailsService = personDetailsService;
     }
 
     @PostMapping(value = "/post/")
-    public Person save(@RequestBody PersonDetailsDto newPerson) {
-        return jpaRepository.saveAndFlush(conversionService.convert(newPerson, Person.class));
+    public PersonDetailsDto save(@RequestBody PersonDetailsDto personDetailsDto) {
+      return personDetailsService.save(personDetailsDto);
     }
 
-    @GetMapping(value = "/id/{id}")
-    public PersonDetailsDto getPersonDto(final @PathVariable("id") Long id) {
-        return conversionService.convert(jpaRepository.getOne(id), PersonDetailsDto.class);
+    @GetMapping (value = "/userName/{username}")
+    public PersonDetailsDto getPersonDetailsByUsername(final @PathVariable String username){
+        return personDetailsService.findPersonByUserName(username);
     }
 
-    @GetMapping (value = "/userName/{userName}")
-    public PersonDetailsDto findPersonByUserName(final @PathVariable String userName){
-        return conversionService.convert(jpaRepository.findPersonByUserName(userName), PersonDetailsDto.class);
+
+    @GetMapping (value = "/id/{id}")
+    public PersonDetailsDto getPersonDetailsDtoById(final @PathVariable Long id){
+        return personDetailsService.findPersonDetailsByPersonId(id);
     }
+//    @GetMapping(value = "/id/{id}")
+//    public PersonDetailsDto getPersonDto(final @PathVariable("id") Long id) {
+//        return conversionService.convert(jpaRepository.getOne(id), PersonDetailsDto.class);
+//    }
+//
+//    @GetMapping (value = "/userName/{userName}")
+//    public PersonDetailsDto findPersonByUserName(final @PathVariable String userName){
+//        return conversionService.convert(jpaRepository.findPersonByUserName(userName), PersonDetailsDto.class);
+//    }
 
 }
 //    @GetMapping(value = "/firstName/{firstName}")

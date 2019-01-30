@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PersonDetailsDtoToPersonConverter implements Converter<PersonDetailsDto, Person> {
+
     @Override
     public Person convert(PersonDetailsDto source) {
-        return new Person(null,null, source.getFirstName(),source.getLastName(), source.getEmail()
-                ,source.getUserName(),source.getPositionList(),null,null);
+        return new Person(null, null, source.getFirstName(),source.getLastName(),source.getEmail(), source.getUserName(),null,null,null);
     }
 }

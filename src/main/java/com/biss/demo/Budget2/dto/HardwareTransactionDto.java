@@ -21,7 +21,7 @@ public class HardwareTransactionDto {
     @JsonIgnore
     private Long version;
     private Date transactionDate;
-    private Person person;
-    private Hardware hardware;
-    private HardwareTransactionType hardwareTransactionType;
+    private HardwareDetailsDto hardwareDetailsDto;
+    private PersonDetailsDto personDetailsDto;
+    private HardwareTransactionTypeDto HardwareTransactionTypeDto;
 }

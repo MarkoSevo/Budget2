@@ -4,6 +4,7 @@ import com.biss.demo.Budget2.model.HardwareTransactionType;
 import com.biss.demo.Budget2.repository.HardwareTransactionJpaRepository;
 import com.biss.demo.Budget2.repository.HardwareTransactionTypeJpaRepository;
 import com.biss.demo.Budget2.service.HardwareTransactionTypeDtoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,6 +12,7 @@ public class HardwareTransactionTypeDtoServiceImpl implements HardwareTransactio
 
     private final HardwareTransactionTypeJpaRepository hardwareTransactionJpaTypeRepository;
 
+    @Autowired
     public HardwareTransactionTypeDtoServiceImpl(HardwareTransactionTypeJpaRepository hardwareTransactionJpaTypeRepository) {
         this.hardwareTransactionJpaTypeRepository = hardwareTransactionJpaTypeRepository;
     }

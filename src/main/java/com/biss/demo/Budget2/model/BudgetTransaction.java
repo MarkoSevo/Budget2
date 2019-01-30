@@ -43,11 +43,12 @@ public class BudgetTransaction {
     @JsonProperty("transactionDate")
     private Date transactionDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id")
     private Person person;
 
     @ManyToMany(mappedBy = "budgetTransactionList")
+    @JsonIgnore
     private List<Hardware> hardwareList = new ArrayList<>();
 
 }

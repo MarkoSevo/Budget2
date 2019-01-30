@@ -5,13 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+public class PersonPositionDto {
 
-public class HardwareTypeDto {
-
-    private Long idDto;
-    private String type;
+    private Date validFrom;
+    private Date validTo;
+    private PositionDto positionDto;
+    private PersonDetailsDto personDetailsDto;
 }
