@@ -9,23 +9,23 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PeronPositionDtoServiceImpl implements PeronPositionDtoService {
+public class PersonPositionDtoServiceImpl implements PeronPositionDtoService {
 
     private final ConversionService conversionService;
     private final PersonPositionJpaRepository personPositionJpaRepository;
 
     @Autowired
-    public PeronPositionDtoServiceImpl(ConversionService conversionService, PersonPositionJpaRepository personPositionJpaRepository) {
+    public PersonPositionDtoServiceImpl(ConversionService conversionService, PersonPositionJpaRepository personPositionJpaRepository) {
         this.conversionService = conversionService;
         this.personPositionJpaRepository = personPositionJpaRepository;
     }
 
     @Override
-    public PersonPositionDto save(PersonPositionDto personPositionDto) {
+    public Long findByPersonId(Long id) {
         PersonPosition personPosition = new PersonPosition();
-        conversionService.convert(personPositionDto, PersonPosition.class);
-        personPositionJpaRepository.save(personPosition);
-        return personPositionDto;
-
+        PersonPositionDto dto = new PersonPositionDto();
+        dto.setPositionId(personPositionJpaRepository.findByPerson_Id(id));
+        conversionService.convert(personPosition,PersonPosition.class);
+        return null;
     }
 }

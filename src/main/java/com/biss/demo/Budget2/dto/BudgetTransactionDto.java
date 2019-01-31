@@ -18,5 +18,5 @@ public class BudgetTransactionDto {
     private BigDecimal inputAmount;
     private BigDecimal outputAmount;
     private Date transactionDate;
-    private PersonDetailsDto personDto;
+    private Long personId;
 }

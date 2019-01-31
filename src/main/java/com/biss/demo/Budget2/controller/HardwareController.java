@@ -42,13 +42,14 @@ public class HardwareController {
     }
 
     @GetMapping(value = "/hardwareTypeId/{hardwareTypeId}")
-    public List<HardwareDetailsDto> findAllByTypeId(final  @PathVariable Long hardwareTypeId) {
+    public List<HardwareDetailsDto> findAllByHardwareTypeId(final  @PathVariable Long hardwareTypeId) {
         return hardwareDetailsService.findAllByHardwareType_Id(hardwareTypeId);
     }
 
     @GetMapping(value = "/hardwareType/{hardwareType}")
     public List<HardwareDetailsDto> findAllByType_type(final @PathVariable String hardwareType) {
         return hardwareDetailsService.findByHardwareType_Type(hardwareType);
+
     }
 
 

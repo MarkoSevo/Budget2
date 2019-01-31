@@ -1,10 +1,9 @@
 package com.biss.demo.Budget2.controller;
 
 
-import com.biss.demo.Budget2.dto.PersonPositionDto;
 import com.biss.demo.Budget2.model.PersonPosition;
 import com.biss.demo.Budget2.repository.PersonPositionJpaRepository;
-import com.biss.demo.Budget2.service.impl.PeronPositionDtoServiceImpl;
+import com.biss.demo.Budget2.service.impl.PersonPositionDtoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,17 +14,12 @@ import java.util.List;
 public class PersonPositionController {
 
     private final PersonPositionJpaRepository jpaRepository;
-    private final PeronPositionDtoServiceImpl peronPositionDtoService;
+    private final PersonPositionDtoServiceImpl peronPositionDtoService;
 
     @Autowired
-    PersonPositionController(PersonPositionJpaRepository jpaRepository, PeronPositionDtoServiceImpl peronPositionDtoService) {
+    PersonPositionController(PersonPositionJpaRepository jpaRepository, PersonPositionDtoServiceImpl peronPositionDtoService) {
         this.jpaRepository = jpaRepository;
         this.peronPositionDtoService = peronPositionDtoService;
-    }
-
-    @PostMapping(value = "/post")
-    public PersonPositionDto save(@RequestBody PersonPositionDto personPosition){
-        return peronPositionDtoService.save(personPosition);
     }
 
     @GetMapping(value = "/all")

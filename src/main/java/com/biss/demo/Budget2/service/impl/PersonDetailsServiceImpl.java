@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+
 
 @Service
 public class PersonDetailsServiceImpl implements PersonDetailsService {
@@ -21,9 +23,10 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
     private final ConversionService conversionService;
     private final PersonPositionJpaRepository personPositionJpaRepository;
     private final BudgetPositionJpaRepository budgetPositionJpaRepository;
+    private final PersonPositionDtoServiceImpl peronPositionDtoService;
 
     @Autowired
-    public PersonDetailsServiceImpl(BudgetJpaRepository budgetJpaRepository, PersonJpaRepository personJpaRepository, HardwareJpaRepository hardwareJpaRepository, PositionJpaRepository positionJpaRepository, HardwareTransactionJpaRepository hardwareTransactionJpaRepository, ConversionService conversionService, PersonPositionJpaRepository personPositionJpaRepository, BudgetPositionJpaRepository budgetPositionJpaRepository) {
+    public PersonDetailsServiceImpl(BudgetJpaRepository budgetJpaRepository, PersonJpaRepository personJpaRepository, HardwareJpaRepository hardwareJpaRepository, PositionJpaRepository positionJpaRepository, HardwareTransactionJpaRepository hardwareTransactionJpaRepository, ConversionService conversionService, PersonPositionJpaRepository personPositionJpaRepository, BudgetPositionJpaRepository budgetPositionJpaRepository, PersonPositionDtoServiceImpl peronPositionDtoService) {
         this.budgetJpaRepository = budgetJpaRepository;
         this.personJpaRepository = personJpaRepository;
         this.hardwareJpaRepository = hardwareJpaRepository;
@@ -32,6 +35,7 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
         this.conversionService = conversionService;
         this.personPositionJpaRepository = personPositionJpaRepository;
         this.budgetPositionJpaRepository = budgetPositionJpaRepository;
+        this.peronPositionDtoService = peronPositionDtoService;
     }
 
     @Override
@@ -42,23 +46,32 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
         dto.setLastName(person.getLastName());
         dto.setEmail(person.getEmail());
         dto.setUserName(person.getUserName());
+        dto.setPositionId(positionJpaRepository.findPersonDetailsByPersonId(person.getId()));
+        conversionService.convert(person, PersonDetailsDto.class);
         return dto;
     }
 
     @Override
     public PersonDetailsDto findPersonDetailsByPersonId(Long id) {
-        Person person = personJpaRepository.getOne(id);
         PersonDetailsDto dto = new PersonDetailsDto();
+        Person person = new Person();
+        PositionDto positionDto = new PositionDto();
         dto.setFirstName(person.getFirstName());
         dto.setLastName(person.getLastName());
         dto.setEmail(person.getEmail());
         dto.setUserName(person.getUserName());
+        dto.setPositionId(PersonDetailsDto.builder().build().getPositionId());
+        conversionService.convert(person, PersonDetailsDto.class);
         return dto;
     }
 
     @Override
     public PersonDetailsDto save(PersonDetailsDto personDetailsDto){
         Person person = conversionService.convert(personDetailsDto, Person.class);
+        person.setFirstName(person.getFirstName());
+        person.setLastName(person.getLastName());
+        person.setEmail(person.getEmail());
+        person.setPositionList(Collections.singletonList(positionJpaRepository.getOne(personDetailsDto.getPositionId())));
         personJpaRepository.save(person);
         return personDetailsDto;
     }

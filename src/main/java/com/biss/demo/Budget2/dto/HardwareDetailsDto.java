@@ -17,6 +17,5 @@ public class HardwareDetailsDto {
     private Long id;
     private BigDecimal price;
     private Long serialNumber;
-    private HardwareTypeDto hardwareTypeDto;
-
+    private Long hardwareTypeId;
 }

@@ -15,6 +15,6 @@ public class PersonPositionDto {
 
     private Date validFrom;
     private Date validTo;
-    private PositionDto positionDto;
-    private PersonDetailsDto personDetailsDto;
+    private Long positionId;
+    private Long personId;
 }

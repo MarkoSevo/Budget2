@@ -1,8 +1,8 @@
 package com.biss.demo.Budget2.dto;
-import com.biss.demo.Budget2.model.Position;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
 
+import com.biss.demo.Budget2.model.Position;
+import lombok.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -17,4 +17,7 @@ public class PersonDetailsDto {
     private String email;
     private String userName;
     private Long positionId;
+    private BigDecimal initialBudget;
+    private BigDecimal remainingBudget;
+    private Long hardwareId;
 }

@@ -65,6 +65,21 @@ public class Person{
             cascade = CascadeType.PERSIST
     )
     private Set<HardwareTransaction> hardwareTransactionList = new HashSet<>();
+//
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        Person person = (Person) o;
+//
+//        return id != null ? id.equals(person.id) : person.id == null;
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return id != null ? id.hashCode() : 0;
+//    }
 }
 
 //
