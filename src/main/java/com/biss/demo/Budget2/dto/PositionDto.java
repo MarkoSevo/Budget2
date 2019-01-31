@@ -13,4 +13,5 @@ public class PositionDto {
 
     private Long id;
     private String positionDto;
+    private Long personId;
 }
