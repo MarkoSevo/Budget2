@@ -1,5 +1,6 @@
 package com.biss.demo.Budget2.repository;
 
+import com.biss.demo.Budget2.dto.HardwareDetailsDto;
 import com.biss.demo.Budget2.model.Hardware;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -15,4 +16,8 @@ public interface HardwareJpaRepository extends JpaRepository<Hardware, Long> {
     List<Hardware> findAllByHardwareType_Id (final Long id);
 
     Long getAllByHardwareTransactionList (final Long id);
+
+//    Hardware findAllByHardwareType_Id(final Long id);
+
+
 }

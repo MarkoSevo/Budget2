@@ -16,9 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "hardware_type")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-        property  = "id",
-        scope     = Long.class)
+
 public class HardwareType {
 
     @Id
@@ -36,7 +34,8 @@ public class HardwareType {
     private String type;
 
     @OneToMany(
-            mappedBy = "hardwareType",fetch = FetchType.EAGER,
+            mappedBy = "hardwareType",
+            fetch = FetchType.LAZY,
             cascade = CascadeType.MERGE
     )
     @JsonManagedReference

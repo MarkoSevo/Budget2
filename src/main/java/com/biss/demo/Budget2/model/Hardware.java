@@ -1,6 +1,5 @@
 package com.biss.demo.Budget2.model;
 
-import com.biss.demo.Budget2.dto.HardwareDetailsDto;
 import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,9 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-        property  = "id",
-        scope     = Long.class)
+
 public class Hardware {
 
     @Id

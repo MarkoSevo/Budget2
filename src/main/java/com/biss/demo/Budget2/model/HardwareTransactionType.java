@@ -1,6 +1,5 @@
 package com.biss.demo.Budget2.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -39,9 +38,6 @@ public class HardwareTransactionType  {
     @OneToMany(
             mappedBy = "hardwareTransactionType",
             cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    @JsonIgnore
+            fetch = FetchType.LAZY)
     private List<HardwareTransaction> comments = new ArrayList<>();
-
 }

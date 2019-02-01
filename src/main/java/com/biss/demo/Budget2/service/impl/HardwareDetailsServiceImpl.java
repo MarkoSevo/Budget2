@@ -30,7 +30,7 @@ public class HardwareDetailsServiceImpl implements HardwareDetailsService {
     @Override
     public HardwareDetailsDto save(HardwareDetailsDto hardwareDetailsDto) {
         Hardware hardware = conversionService.convert(hardwareDetailsDto,Hardware.class);
-        hardware.setHardwareType(hardwareTypeJpaRepository.getOne(hardwareDetailsDto.getHardwareTypeId()));
+        hardware.setHardwareType(hardwareTypeJpaRepository.getOne(Long.valueOf(hardwareDetailsDto.getHardwareTypeId())));
         hardwareJpaRepository.save(hardware);
         return hardwareDetailsDto;
     }
@@ -49,12 +49,6 @@ public class HardwareDetailsServiceImpl implements HardwareDetailsService {
     @Override
     public List<HardwareDetailsDto> findAllByHardwareType_Id(Long id) {
         return (List<HardwareDetailsDto>) conversionService.convert(hardwareJpaRepository.findAllByHardwareType_Id(id), TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(Hardware.class)),
-                TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(HardwareDetailsDto.class)));
-    }
-
-    @Override
-    public List<HardwareDetailsDto> findAllByHardwareType(String type) {
-        return (List<HardwareDetailsDto>) conversionService.convert(hardwareJpaRepository.findAllByHardwareType_Type(type),  TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(Hardware.class)),
                 TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(HardwareDetailsDto.class)));
     }
 }

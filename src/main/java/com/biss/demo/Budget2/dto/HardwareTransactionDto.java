@@ -1,9 +1,5 @@
 package com.biss.demo.Budget2.dto;
 
-import com.biss.demo.Budget2.model.Hardware;
-import com.biss.demo.Budget2.model.HardwareTransactionType;
-import com.biss.demo.Budget2.model.Person;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,10 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 
 public class HardwareTransactionDto {
-    @JsonIgnore
-    private Long id;
-    @JsonIgnore
-    private Long version;
+
     private Date transactionDate;
     private Long hardwareId;
     private Long personId;

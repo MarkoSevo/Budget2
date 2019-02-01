@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 public class PositionToPositionDto implements Converter<Position, PositionDto> {
     @Override
     public PositionDto convert(Position source) {
-        return new PositionDto(source.getId(),source.getPosition(),source.getId());
+        return new PositionDto(source.getId(),source.getPosition());
     }
 }

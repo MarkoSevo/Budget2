@@ -1,6 +1,5 @@
 package com.biss.demo.Budget2.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,9 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -43,6 +39,8 @@ public class Budget{
             inverseJoinColumns = @JoinColumn(name = "position_id")
     )
     private Set<Position> positionList;
+
+
 }
 //    @ManyToMany(cascade = {
 //            CascadeType.MERGE

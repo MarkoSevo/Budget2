@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 
 public class HardwareTransactionTypeDto {
-    @JsonIgnore
+
     private Long id;
     private String type;
 }

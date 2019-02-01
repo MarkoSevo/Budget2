@@ -11,6 +11,6 @@ public class HardwareTransactionDtoToHardwareTransaction implements Converter<Ha
 
     @Override
     public HardwareTransaction convert(HardwareTransactionDto source) {
-        return new HardwareTransaction(source.getId(),source.getVersion(),source.getTransactionDate(),null,null,null);
+        return new HardwareTransaction(null,null,source.getTransactionDate(),null,null,null);
     }
 }

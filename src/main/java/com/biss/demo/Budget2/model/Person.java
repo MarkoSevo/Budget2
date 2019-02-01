@@ -16,7 +16,8 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "person")
-public class Person{
+
+public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,34 +53,41 @@ public class Person{
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "position_id")
     )
+    @JsonBackReference("positionList")
     private List<Position> positionList;
 
     @OneToMany(
             mappedBy = "person",
-            cascade = CascadeType.PERSIST
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.LAZY
     )
+    @JsonIgnore
     private Set<BudgetTransaction> budgetTransactionList = new HashSet<>();
 
     @OneToMany(
             mappedBy = "person",
-            cascade = CascadeType.PERSIST
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.LAZY
     )
+    @JsonIgnore
     private Set<HardwareTransaction> hardwareTransactionList = new HashSet<>();
-//
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//
-//        Person person = (Person) o;
-//
-//        return id != null ? id.equals(person.id) : person.id == null;
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return id != null ? id.hashCode() : 0;
-//    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Person person = (Person) o;
+
+        return id != null ? id.equals(person.id) : person.id == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
+
+
 }
 
 //

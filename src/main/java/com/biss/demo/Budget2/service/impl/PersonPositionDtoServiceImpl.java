@@ -22,10 +22,10 @@ public class PersonPositionDtoServiceImpl implements PeronPositionDtoService {
 
     @Override
     public Long findByPersonId(Long id) {
-        PersonPosition personPosition = new PersonPosition();
+ /*       PersonPosition personPosition = new PersonPosition();
         PersonPositionDto dto = new PersonPositionDto();
         dto.setPositionId(personPositionJpaRepository.findByPerson_Id(id));
-        conversionService.convert(personPosition,PersonPosition.class);
+        conversionService.convert(personPosition,PersonPosition.class);*/
         return null;
     }
 }

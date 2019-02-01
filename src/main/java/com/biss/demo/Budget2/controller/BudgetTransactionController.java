@@ -1,6 +1,7 @@
 package com.biss.demo.Budget2.controller;
 
-import com.biss.demo.Budget2.dto.BudgetTransactionDto;
+import com.biss.demo.Budget2.dto.BudgetInputTransactionDto;
+import com.biss.demo.Budget2.dto.BudgetOutputTransactionDto;
 import com.biss.demo.Budget2.model.BudgetTransaction;
 import com.biss.demo.Budget2.repository.BudgetTransactionJpaRepository;
 import com.biss.demo.Budget2.service.BudgetTransactionService;
@@ -24,9 +25,14 @@ public class BudgetTransactionController {
         this.budgetTransactionService = budgetTransactionService;
     }
 
-    @PostMapping (value = "/post")
-    public BudgetTransactionDto save(@RequestBody BudgetTransactionDto budgetTransactionDto){
-        return budgetTransactionService.save(budgetTransactionDto);
+    @PostMapping (value = "/post/inputAmount/")
+    public BudgetInputTransactionDto saveInput(@RequestBody BudgetInputTransactionDto budgetTransactionDto){
+        return budgetTransactionService.saveInput(budgetTransactionDto);
+    }
+
+    @PostMapping (value = "/post/outputAmount/")
+    public BudgetOutputTransactionDto saveOutput(@RequestBody BudgetOutputTransactionDto budgetOutputTransactionDto){
+        return budgetTransactionService.saveOutput(budgetOutputTransactionDto);
     }
 
     @GetMapping(value = "/id/{id}")
