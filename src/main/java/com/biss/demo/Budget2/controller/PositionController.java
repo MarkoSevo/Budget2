@@ -6,9 +6,7 @@ import com.biss.demo.Budget2.repository.PositionJpaRepository;
 import com.biss.demo.Budget2.service.PositionDtoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
-import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -47,12 +45,3 @@ public class PositionController {
         return positionDtoService.findAll();
     }
 }
-
-//    @GetMapping (value = "/id/{id}")
-//    public PersonDetailsDto findById(final @PathVariable("id") Long id){
-//        return personDetailsService.findPersonDetailsByPersonId(id);
-//    }
-//
-//    @GetMapping (value = "/userName/{userName}")
-//    public PersonDetailsDto findByUserName(final @PathVariable("userName") String userName){
-//        return personDetailsService.findPersonByUserName(userName);

@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
-import java.util.List;
 
 @Data
 @Builder
@@ -22,5 +20,4 @@ public class GetPersonDto {
     private String position;
     private BigDecimal initialBudget;
     private BigDecimal remainingBudget;
-    private List<HardwareTransactionDto> hardwareTransactionDtoList;
 }

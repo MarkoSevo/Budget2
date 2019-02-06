@@ -10,6 +10,6 @@ public class PersonToGetPersonDto implements Converter<Person, GetPersonDto> {
     @Override
     public GetPersonDto convert(Person source) {
         return new GetPersonDto(source.getId(),source.getFirstName(),source.getLastName(),source.getEmail(),source.getUserName(),
-                null,null,null,null);
+                null,null,null);
     }
 }

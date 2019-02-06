@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -38,7 +40,7 @@ public class Budget{
             joinColumns = @JoinColumn(name = "budget_id"),
             inverseJoinColumns = @JoinColumn(name = "position_id")
     )
-    private Set<Position> positionList;
+    private List<Position> positionList = new ArrayList<>();
 
 
 }

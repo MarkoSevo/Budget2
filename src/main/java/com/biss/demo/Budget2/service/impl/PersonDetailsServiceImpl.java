@@ -1,7 +1,6 @@
 package com.biss.demo.Budget2.service.impl;
 
 import com.biss.demo.Budget2.dto.GetPersonDto;
-import com.biss.demo.Budget2.dto.HardwareDetailsDto;
 import com.biss.demo.Budget2.dto.PersonDetailsDto;
 import com.biss.demo.Budget2.model.*;
 import com.biss.demo.Budget2.repository.*;
@@ -9,9 +8,7 @@ import com.biss.demo.Budget2.service.PersonDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
-
 import java.util.Collections;
-
 
 @Service
 public class PersonDetailsServiceImpl implements PersonDetailsService {
@@ -21,32 +18,25 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
     private final PositionJpaRepository positionJpaRepository;
     private final ConversionService conversionService;
     private final PersonPositionJpaRepository personPositionJpaRepository;
-    private final HardwareTransactionDtoServiceImpl hardwareTransactionDtoService;
-
+    private final BudgetPositionJpaRepository budgetPositionJpaRepository;
 
     @Autowired
-    public PersonDetailsServiceImpl(BudgetJpaRepository budgetJpaRepository, PersonJpaRepository personJpaRepository, PositionJpaRepository positionJpaRepository, ConversionService conversionService, PersonPositionJpaRepository personPositionJpaRepository, HardwareTransactionDtoServiceImpl hardwareTransactionDtoService) {
+    public PersonDetailsServiceImpl(BudgetJpaRepository budgetJpaRepository, PersonJpaRepository personJpaRepository, PositionJpaRepository positionJpaRepository, ConversionService conversionService, PersonPositionJpaRepository personPositionJpaRepository, BudgetPositionJpaRepository budgetPositionJpaRepository) {
         this.budgetJpaRepository = budgetJpaRepository;
         this.personJpaRepository = personJpaRepository;
         this.positionJpaRepository = positionJpaRepository;
         this.conversionService = conversionService;
         this.personPositionJpaRepository = personPositionJpaRepository;
-        this.hardwareTransactionDtoService = hardwareTransactionDtoService;
+        this.budgetPositionJpaRepository = budgetPositionJpaRepository;
     }
 
     @Override
     public GetPersonDto findPersonByUserName(String username) {
         Person person = personJpaRepository.findPersonByUserName(username);
         GetPersonDto dto = new GetPersonDto();
-        dto.setId(person.getId());
-        dto.setFirstName(person.getFirstName());
-        dto.setLastName(person.getLastName());
-        dto.setEmail(person.getEmail());
-        dto.setUserName(person.getUserName());
-        dto.setPosition(personPositionJpaRepository.findPersonDetailsByPersonId(String.valueOf(person.getId())));
+        GetPerson(person, dto);
         dto.setInitialBudget(budgetJpaRepository.findBudgetByPositionList(person.getId()));
         dto.setRemainingBudget(budgetJpaRepository.findRemainingAmount(person.getId()));
-        dto.setHardwareTransactionDtoList(hardwareTransactionDtoService.getAllByPersonId());
         conversionService.convert(person, GetPersonDto.class);
         return dto;
     }
@@ -55,13 +45,18 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
     public GetPersonDto findPersonDetailsByPersonId(Long id) {
         Person person = personJpaRepository.getOne(id);
         GetPersonDto dto = new GetPersonDto();
+        GetPerson(person, dto);
+        conversionService.convert(person, GetPersonDto.class);
+        return dto;
+    }
+
+    private void GetPerson(Person person, GetPersonDto dto) {
+        dto.setId(person.getId());
         dto.setFirstName(person.getFirstName());
         dto.setLastName(person.getLastName());
         dto.setEmail(person.getEmail());
         dto.setUserName(person.getUserName());
         dto.setPosition(personPositionJpaRepository.findPersonDetailsByPersonId(String.valueOf(person.getId())));
-        conversionService.convert(person, GetPersonDto.class);
-        return dto;
     }
 
     @Override
@@ -71,6 +66,7 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
         person.setLastName(person.getLastName());
         person.setEmail(person.getEmail());
         person.setPositionList(Collections.singletonList(positionJpaRepository.getOne(personDetailsDto.getPositionId())));
+        person.setBudgetTransactionList(budgetPositionJpaRepository.findByPosition_Id(personDetailsDto.getPositionId()));
         personJpaRepository.save(person);
         return personDetailsDto;
     }

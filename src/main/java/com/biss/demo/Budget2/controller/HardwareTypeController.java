@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
 
 @RestController
 @RequestMapping("/hardwaretypes")
@@ -57,17 +55,6 @@ public class HardwareTypeController {
         return (List<HardwareDetailsDto>) conversionService.convert(hardwareJpaRepository.findAllByHardwareType_Type(hardwareType), TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(Hardware.class)),
                 TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(HardwareDetailsDto.class)));
     }
-
-
-
-//    @GetMapping (value = "/type/{type}")
-//    public HardwareTypeDto getHardwareDto(final @PathVariable("type") String type){
-//        return conversionService.convert(jpaRepository.findAllByType(type), HardwareTypeDto.class);
-//    }
-//@GetMapping (value = "/id/{id}")
-//public HardwareTypeDto getHardwareDto(final @PathVariable("id") Long id){
-//    return conversionService.convert(jpaRepository.getOne(id), HardwareTypeDto.class);
-//}
 
 }
 

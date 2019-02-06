@@ -6,15 +6,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Table(name = "person")
 
 public class Person {
@@ -54,7 +53,7 @@ public class Person {
             inverseJoinColumns = @JoinColumn(name = "position_id")
     )
     @JsonBackReference("positionList")
-    private List<Position> positionList;
+    private List<Position> positionList = new ArrayList<>();
 
     @OneToMany(
             mappedBy = "person",
@@ -62,7 +61,7 @@ public class Person {
             fetch = FetchType.LAZY
     )
     @JsonIgnore
-    private Set<BudgetTransaction> budgetTransactionList = new HashSet<>();
+    private List<BudgetTransaction> budgetTransactionList = new ArrayList<>();
 
     @OneToMany(
             mappedBy = "person",
@@ -70,29 +69,22 @@ public class Person {
             fetch = FetchType.LAZY
     )
     @JsonIgnore
-    private Set<HardwareTransaction> hardwareTransactionList = new HashSet<>();
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Person person = (Person) o;
-
-        return id != null ? id.equals(person.id) : person.id == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
-    }
-
+    private List<HardwareTransaction> hardwareTransactionList = new ArrayList<>();
+//
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        Person person = (Person) o;
+//
+//        return Objects.equals(id, person.id);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return id != null ? id.hashCode() : 0;
+//    }
+//
 
 }
-
-//
-//    @OneToMany(
-//            mappedBy = "person",
-//            cascade = CascadeType.ALL
-//    )
-//    private List<PersonPosition> personPositionList = new ArrayList<>();

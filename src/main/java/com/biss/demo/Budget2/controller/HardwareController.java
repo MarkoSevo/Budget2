@@ -1,13 +1,11 @@
 package com.biss.demo.Budget2.controller;
 
 import com.biss.demo.Budget2.dto.HardwareDetailsDto;
-import com.biss.demo.Budget2.model.Hardware;
 import com.biss.demo.Budget2.repository.HardwareJpaRepository;
 import com.biss.demo.Budget2.service.HardwareDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 
@@ -53,13 +51,3 @@ public class HardwareController {
     }
 
 }
-//    @GetMapping(value = "/typeId/{typeId}")
-//    public List<HardwareDetailsDto> findAllByTypeId(final @PathVariable Long typeId){
-//        return (List<HardwareDetailsDto>) conversionService.convert(hardwareJpaRepository.findAllByHardwareType_Id(typeId), TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(Hardware.class)),
-//                    TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(HardwareDetailsDto.class)));
-//        }
-//
-//    @GetMapping(value = "/type/{type}")
-//    public HardwareDetailsDto findByType(final @PathVariable("type") String hardwareType) {
-//        return hardwareDetailsService.findByHardwareType(hardwareType);
-//    }

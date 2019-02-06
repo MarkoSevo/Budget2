@@ -1,7 +1,6 @@
 package com.biss.demo.Budget2.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "hardware_transaction_type")
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class HardwareTransactionType  {
 
     @Id
@@ -39,5 +39,6 @@ public class HardwareTransactionType  {
             mappedBy = "hardwareTransactionType",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    private List<HardwareTransaction> comments = new ArrayList<>();
+    @JsonManagedReference
+    private List<HardwareTransaction> hardwareTransactions = new ArrayList<>();
 }

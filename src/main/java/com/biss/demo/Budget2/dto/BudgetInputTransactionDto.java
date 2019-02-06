@@ -1,7 +1,5 @@
 package com.biss.demo.Budget2.dto;
 
-import com.biss.demo.Budget2.model.Person;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

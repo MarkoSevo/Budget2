@@ -1,13 +1,15 @@
 package com.biss.demo.Budget2.repository;
 
 import com.biss.demo.Budget2.model.BudgetPosition;
+import com.biss.demo.Budget2.model.BudgetTransaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import java.math.BigDecimal;
+
+import java.util.List;
 
 
 @Repository
 public interface BudgetPositionJpaRepository extends JpaRepository<BudgetPosition, Long> {
 
-    BigDecimal findByPositionId(Long id);
+    List<BudgetTransaction> findByPosition_Id (Long id);
 }

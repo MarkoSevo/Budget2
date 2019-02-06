@@ -1,7 +1,6 @@
 package com.biss.demo.Budget2.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +16,8 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table
+@Table(name ="budget_transaction")
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class BudgetTransaction {
 
     @Id
@@ -47,7 +47,7 @@ public class BudgetTransaction {
     private Person person;
 
     @ManyToMany(mappedBy = "budgetTransactionList")
-    @JsonIgnore
+    @JsonManagedReference
     private List<Hardware> hardwareList = new ArrayList<>();
 
 }

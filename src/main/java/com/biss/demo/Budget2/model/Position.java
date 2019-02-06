@@ -6,8 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 @Data
@@ -16,7 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "position")
-
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Position {
 
     @Id
@@ -35,31 +34,24 @@ public class Position {
 
     @ManyToMany(mappedBy = "positionList",fetch = FetchType.LAZY)
     @JsonBackReference
-    private Set<Person> personList = new HashSet<>();
+    private List<Person> personList = new ArrayList<>();
 
     @ManyToMany(mappedBy = "positionList",fetch = FetchType.LAZY)
-    private Set<Budget> budgetList = new HashSet<>();
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Position position = (Position) o;
-
-        return id != null ? id.equals(position.id) : position.id == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
-    }
+    private List<Budget> budgetList = new ArrayList<>();
+//
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        Position position = (Position) o;
+//
+//        return Objects.equals(id, position.id);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return id != null ? id.hashCode() : 0;
+//    }
 }
-
-//    @OneToMany(
-//            mappedBy = "position",
-//            cascade = CascadeType.ALL
-//    )
-//    private List<PersonPosition> personPositionList = new ArrayList<>();
-
 

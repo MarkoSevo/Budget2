@@ -1,17 +1,14 @@
 package com.biss.demo.Budget2.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import java.io.Serializable;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class HardwareTransactionTypeDto {
+public class HardwareTransactionTypeDto implements Serializable {
 
     private Long id;
     private String type;

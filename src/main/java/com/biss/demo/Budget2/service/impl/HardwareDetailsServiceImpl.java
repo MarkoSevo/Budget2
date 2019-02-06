@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,7 +28,7 @@ public class HardwareDetailsServiceImpl implements HardwareDetailsService {
     @Override
     public HardwareDetailsDto save(HardwareDetailsDto hardwareDetailsDto) {
         Hardware hardware = conversionService.convert(hardwareDetailsDto,Hardware.class);
-        hardware.setHardwareType(hardwareTypeJpaRepository.getOne(Long.valueOf(hardwareDetailsDto.getHardwareTypeId())));
+        hardware.setHardwareType(hardwareTypeJpaRepository.getOne(Long.valueOf(hardwareDetailsDto.getHardwareType())));
         hardwareJpaRepository.save(hardware);
         return hardwareDetailsDto;
     }

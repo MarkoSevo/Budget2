@@ -4,18 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+public class BudgetTransactionPersonDto {
 
-public class HardwareTransactionDto implements Serializable {
-
-    private Date transactionDate;
-    private Long hardwareId;
     private Long personId;
-    private Long hardwareTransactionTypeId;
+    private BigDecimal inputAmount;
+    private BigDecimal outputAmount;
+    private Date transactionDate;
 }
