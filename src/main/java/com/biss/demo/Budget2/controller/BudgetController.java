@@ -1,16 +1,13 @@
 package com.biss.demo.Budget2.controller;
 
 import com.biss.demo.Budget2.dto.BudgetDto;
-import com.biss.demo.Budget2.dto.PositionDto;
 import com.biss.demo.Budget2.model.Budget;
-import com.biss.demo.Budget2.model.Position;
 import com.biss.demo.Budget2.repository.BudgetJpaRepository;
+import com.biss.demo.Budget2.service.impl.BudgetDtoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
-import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 
 @RestController
@@ -19,11 +16,14 @@ public class BudgetController {
 
     private final BudgetJpaRepository jpaRepository;
     private final ConversionService conversionService;
+    private final BudgetDtoServiceImpl budgetDtoServiceImpl;
+
 
     @Autowired
-    public BudgetController(final BudgetJpaRepository jpaRepository, ConversionService conversionService) {
+    public BudgetController(final BudgetJpaRepository jpaRepository, ConversionService conversionService, BudgetDtoServiceImpl budgetDtoService) {
         this.jpaRepository = jpaRepository;
         this.conversionService = conversionService;
+        this.budgetDtoServiceImpl = budgetDtoService;
     }
 
     @PostMapping (value = "/post")
@@ -41,10 +41,15 @@ public class BudgetController {
         return conversionService.convert(jpaRepository.findBudgetByAmount(amount), BudgetDto.class);
     }
 
-    @GetMapping (value = "/all")
-    public List<BudgetDto> findALL() {
-        return (List<BudgetDto>) conversionService.convert(jpaRepository.findAll(), TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(Budget.class)),
-                TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(BudgetDto.class)));
+    @GetMapping(value = "/positionId/{id}")
+    public BigDecimal findBudgetByPosition(final @PathVariable Long id){
+        return budgetDtoServiceImpl.findBudgetByPosition(id);
     }
+
+//    @GetMapping (value = "/all")
+//    public List<BudgetDto> findALL() {
+//        return (List<BudgetDto>) conversionService.convert(jpaRepository.findAll(), TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(Budget.class)),
+//                TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(BudgetDto.class)));
+//    }
 
 }

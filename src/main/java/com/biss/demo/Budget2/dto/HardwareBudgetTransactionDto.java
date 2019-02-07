@@ -1,17 +1,19 @@
 package com.biss.demo.Budget2.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.math.BigDecimal;
+import java.io.Serializable;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BudgetDto {
+public class HardwareBudgetTransactionDto implements Serializable{
 
-    private BigDecimal amount;
-
+    private Long personId;
+    private Long hardwareId;
+    private Long budgetTransactionId;
 }

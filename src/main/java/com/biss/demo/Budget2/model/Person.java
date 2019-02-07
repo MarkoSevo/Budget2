@@ -1,10 +1,7 @@
 package com.biss.demo.Budget2.model;
 
 import com.fasterxml.jackson.annotation.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import javax.persistence.*;
 import java.util.*;
 
@@ -52,7 +49,6 @@ public class Person {
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "position_id")
     )
-    @JsonBackReference("positionList")
     private List<Position> positionList = new ArrayList<>();
 
     @OneToMany(
@@ -60,7 +56,6 @@ public class Person {
             cascade = CascadeType.PERSIST,
             fetch = FetchType.LAZY
     )
-    @JsonIgnore
     private List<BudgetTransaction> budgetTransactionList = new ArrayList<>();
 
     @OneToMany(
@@ -68,8 +63,8 @@ public class Person {
             cascade = CascadeType.PERSIST,
             fetch = FetchType.LAZY
     )
-    @JsonIgnore
     private List<HardwareTransaction> hardwareTransactionList = new ArrayList<>();
+
 //
 //    @Override
 //    public boolean equals(Object o) {

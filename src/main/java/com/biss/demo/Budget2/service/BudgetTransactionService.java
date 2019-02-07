@@ -1,12 +1,9 @@
 package com.biss.demo.Budget2.service;
 
-import com.biss.demo.Budget2.converter.BudgetInputTransactionToBudgetInputTransactionDto;
 import com.biss.demo.Budget2.dto.BudgetInputTransactionDto;
 import com.biss.demo.Budget2.dto.BudgetOutputTransactionDto;
-import com.biss.demo.Budget2.model.BudgetTransaction;
 
-
-import java.util.List;
+import java.math.BigDecimal;
 
 public interface BudgetTransactionService {
 
@@ -14,7 +11,6 @@ public interface BudgetTransactionService {
 
     BudgetOutputTransactionDto saveOutput(BudgetOutputTransactionDto budgetTransactionDto);
 
-    List<BudgetInputTransactionToBudgetInputTransactionDto> findAll();
+    BigDecimal saveInitialTransaction(Long id);
 
-    BudgetInputTransactionDto findInitialBudget(Long id);
 }

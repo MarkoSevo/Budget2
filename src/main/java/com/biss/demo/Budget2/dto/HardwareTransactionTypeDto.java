@@ -8,7 +8,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class HardwareTransactionTypeDto implements Serializable {
+public class HardwareTransactionTypeDto {
 
     private Long id;
     private String type;

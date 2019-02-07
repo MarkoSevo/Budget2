@@ -1,20 +1,16 @@
 package com.biss.demo.Budget2.dto;
 
 import lombok.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PersonDetailsDto {
+public class InitialBudgetDto {
 
-    private Long id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String userName;
     private Long positionId;
     private BigDecimal initialBudget;
+    private Date transactionDate;
 }

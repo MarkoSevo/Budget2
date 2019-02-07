@@ -1,9 +1,6 @@
 package com.biss.demo.Budget2.repository;
 
 import com.biss.demo.Budget2.model.Budget;
-import com.biss.demo.Budget2.model.BudgetPosition;
-import com.biss.demo.Budget2.model.Position;
-import org.springframework.boot.autoconfigure.validation.ValidationAutoConfiguration;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

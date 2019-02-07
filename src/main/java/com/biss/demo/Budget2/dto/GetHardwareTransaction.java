@@ -12,10 +12,10 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class GetHardwareTransaction implements Serializable {
+public class GetHardwareTransaction {
 
     private Long personId;
     private Date transactionDate;
     private Long hardwareId;
-    private String hardwareTransactionTypeId;
+    private String hardwareTransactionType;
 }

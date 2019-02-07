@@ -12,6 +12,7 @@ public class PersonToPersonDetailsDtoConverter implements Converter<Person, Pers
 
     @Override
     public PersonDetailsDto convert(Person source) {
-        return new PersonDetailsDto(source.getId(), source.getFirstName(),source.getLastName(),source.getEmail(),source.getUserName(),null,null);
+        return new PersonDetailsDto(source.getId(), source.getFirstName(),source.getLastName(),source.getEmail(),source.getUserName(),
+                null,null);
     }
 }

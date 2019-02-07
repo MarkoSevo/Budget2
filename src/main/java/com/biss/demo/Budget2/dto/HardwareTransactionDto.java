@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class HardwareTransactionDto implements Serializable {
+public class HardwareTransactionDto {
 
     private Date transactionDate;
     private Long hardwareId;
