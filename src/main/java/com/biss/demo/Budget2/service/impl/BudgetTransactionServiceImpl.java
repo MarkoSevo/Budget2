@@ -2,6 +2,7 @@ package com.biss.demo.Budget2.service.impl;
 
 import com.biss.demo.Budget2.dto.BudgetInputTransactionDto;
 import com.biss.demo.Budget2.dto.BudgetOutputTransactionDto;
+import com.biss.demo.Budget2.dto.HardwareDetailsDto;
 import com.biss.demo.Budget2.model.BudgetTransaction;
 import com.biss.demo.Budget2.repository.BudgetTransactionJpaRepository;
 import com.biss.demo.Budget2.repository.PersonJpaRepository;
@@ -19,16 +20,12 @@ public class BudgetTransactionServiceImpl implements BudgetTransactionService {
     private final ConversionService conversionService;
     private final BudgetTransactionJpaRepository budgetTransactionJpaRepository;
     private final PersonJpaRepository personJpaRepository;
-    private final BudgetDtoServiceImpl budgetDtoServiceImpl;
-    private final InitialBudgetTransactionServiceImpl initialBudgetTransactionService;
 
         @Autowired
-        public BudgetTransactionServiceImpl(ConversionService conversionService, BudgetTransactionJpaRepository budgetTransactionJpaRepository, PersonJpaRepository personJpaRepository, BudgetDtoServiceImpl budgetDtoServiceImpl, InitialBudgetTransactionServiceImpl initialBudgetTransactionService) {
+        public BudgetTransactionServiceImpl(ConversionService conversionService, BudgetTransactionJpaRepository budgetTransactionJpaRepository, PersonJpaRepository personJpaRepository) {
             this.conversionService = conversionService;
             this.budgetTransactionJpaRepository = budgetTransactionJpaRepository;
             this.personJpaRepository = personJpaRepository;
-            this.budgetDtoServiceImpl = budgetDtoServiceImpl;
-            this.initialBudgetTransactionService = initialBudgetTransactionService;
         }
 
         @Override
@@ -49,13 +46,21 @@ public class BudgetTransactionServiceImpl implements BudgetTransactionService {
             return budgetOutputTransactionDto;
         }
 
-    @Override
-    public BigDecimal saveInitialTransaction(Long id) {
+        @Override
+        public BigDecimal saveInitialTransaction(Long id) {
 
-        BudgetInputTransactionDto budgetInputTransactionDto = new BudgetInputTransactionDto();
-        BudgetTransaction budgetTransaction = conversionService.convert(budgetInputTransactionDto, BudgetTransaction.class);
-//        budgetTransaction.setInputAmount(initialBudgetTransactionService.saveInitialTransaction());
-        return budgetInputTransactionDto.getAmount();
-    }
+            BudgetInputTransactionDto budgetInputTransactionDto = new BudgetInputTransactionDto();
+            BudgetTransaction budgetTransaction = conversionService.convert(budgetInputTransactionDto, BudgetTransaction.class);
+            return budgetInputTransactionDto.getAmount();
+        }
+
+        @Override
+        public BudgetOutputTransactionDto hardwareTransaction(BigDecimal price) {
+            BudgetOutputTransactionDto budgetOutputTransactionDto = new BudgetOutputTransactionDto();
+            HardwareDetailsDto hardwareDetailsDto = new HardwareDetailsDto();
+            BudgetTransaction budgetTransaction = conversionService.convert(budgetOutputTransactionDto, BudgetTransaction.class);
+            budgetTransaction.setOutputAmount(hardwareDetailsDto.getPrice());
+            return budgetOutputTransactionDto;
+        }
 
 }

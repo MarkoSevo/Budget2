@@ -12,4 +12,6 @@ public interface HardwareDetailsService {
     List<HardwareDetailsDto> findAll();
 
     List<HardwareDetailsDto> findAllByHardwareType_Id (Long id);
+
+    HardwareDetailsDto findHardwareById (Long id);
 }

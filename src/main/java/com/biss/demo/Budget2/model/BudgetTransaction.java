@@ -49,7 +49,6 @@ public class BudgetTransaction {
     @ManyToMany(mappedBy = "budgetTransactionList")
     @JsonManagedReference
     private List<Hardware> hardwareList = new ArrayList<>();
-
 }
 
 

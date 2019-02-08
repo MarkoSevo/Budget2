@@ -16,5 +16,4 @@ public class PersonDetailsDto {
     private String email;
     private String userName;
     private Long positionId;
-    private BigDecimal initialBudget;
 }

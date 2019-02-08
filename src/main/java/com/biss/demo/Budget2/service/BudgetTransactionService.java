@@ -13,4 +13,6 @@ public interface BudgetTransactionService {
 
     BigDecimal saveInitialTransaction(Long id);
 
+    BudgetOutputTransactionDto hardwareTransaction(BigDecimal price);
+
 }

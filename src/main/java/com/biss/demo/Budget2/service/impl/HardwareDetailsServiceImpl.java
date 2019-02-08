@@ -3,6 +3,7 @@ package com.biss.demo.Budget2.service.impl;
 import com.biss.demo.Budget2.dto.HardwareDetailsDto;
 import com.biss.demo.Budget2.model.Hardware;
 import com.biss.demo.Budget2.repository.HardwareJpaRepository;
+import com.biss.demo.Budget2.repository.HardwareTransactionJpaRepository;
 import com.biss.demo.Budget2.repository.HardwareTypeJpaRepository;
 import com.biss.demo.Budget2.service.HardwareDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,14 @@ public class HardwareDetailsServiceImpl implements HardwareDetailsService {
     private final HardwareJpaRepository hardwareJpaRepository;
     private final HardwareTypeJpaRepository hardwareTypeJpaRepository;
     private final ConversionService conversionService;
+    private final HardwareTransactionJpaRepository hardwareTransactionJpaRepository;
 
     @Autowired
-    public HardwareDetailsServiceImpl(HardwareJpaRepository hardwareJpaRepository, HardwareTypeJpaRepository hardwareTypeJpaRepository, ConversionService conversionService) {
+    public HardwareDetailsServiceImpl(HardwareJpaRepository hardwareJpaRepository, HardwareTypeJpaRepository hardwareTypeJpaRepository, ConversionService conversionService, HardwareTransactionJpaRepository hardwareTransactionJpaRepository) {
         this.hardwareJpaRepository = hardwareJpaRepository;
         this.hardwareTypeJpaRepository = hardwareTypeJpaRepository;
         this.conversionService = conversionService;
+        this.hardwareTransactionJpaRepository = hardwareTransactionJpaRepository;
     }
 
     @Override
@@ -32,6 +35,18 @@ public class HardwareDetailsServiceImpl implements HardwareDetailsService {
         hardwareJpaRepository.save(hardware);
         return hardwareDetailsDto;
     }
+
+    @Override
+    public HardwareDetailsDto findHardwareById (Long id){
+        HardwareDetailsDto hardwareDetailsDto = new HardwareDetailsDto();
+        Hardware hardware = hardwareJpaRepository.getOne(id);
+        hardwareDetailsDto.setId(hardware.getId());
+        hardwareDetailsDto.setPrice(hardware.getPrice());
+        hardwareDetailsDto.setSerialNumber(hardware.getSerialNumber());
+        hardwareDetailsDto.setStatus(hardwareTransactionJpaRepository.findHardwareTransactionsByHardware_Id(hardware.getId()));
+        return hardwareDetailsDto;
+    }
+
     @Override
     public List<HardwareDetailsDto> findByHardwareType_Type(String hardwareType) {
         List<HardwareDetailsDto> hardwareDetailsDtoList = (List<HardwareDetailsDto>) conversionService.convert(hardwareJpaRepository.findAllByHardwareType_Type(hardwareType), TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(Hardware.class)),
@@ -49,5 +64,6 @@ public class HardwareDetailsServiceImpl implements HardwareDetailsService {
         return (List<HardwareDetailsDto>) conversionService.convert(hardwareJpaRepository.findAllByHardwareType_Id(id), TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(Hardware.class)),
                 TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(HardwareDetailsDto.class)));
     }
+
 }
 

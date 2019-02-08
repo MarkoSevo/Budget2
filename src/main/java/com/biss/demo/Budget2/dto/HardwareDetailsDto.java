@@ -16,4 +16,5 @@ public class HardwareDetailsDto {
     private BigDecimal price;
     private Long serialNumber;
     private String hardwareType;
+    private HardwareDetailsDto status;
 }

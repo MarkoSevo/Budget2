@@ -9,4 +9,6 @@ public interface GetHardwareTransactionService {
     List<GetHardwareTransaction> findAllByPerson(Long id);
 
     List<GetHardwareTransaction> findAllByHardware(Long id);
+
+    List<GetHardwareTransaction> findAll();
 }

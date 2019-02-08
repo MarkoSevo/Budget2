@@ -1,6 +1,7 @@
 package com.biss.demo.Budget2.service.impl;
 
 import com.biss.demo.Budget2.dto.GetHardwareTransaction;
+import com.biss.demo.Budget2.dto.HardwareTransactionDto;
 import com.biss.demo.Budget2.model.HardwareTransaction;
 import com.biss.demo.Budget2.repository.HardwareTransactionJpaRepository;
 import com.biss.demo.Budget2.service.GetHardwareTransactionService;
@@ -31,6 +32,12 @@ public class GetHardwareTransactionServiceImpl implements GetHardwareTransaction
     @Override
     public List<GetHardwareTransaction> findAllByHardware(Long id) {
         return (List<GetHardwareTransaction>) conversionService.convert(hardwareTransactionJpaRepository.findAllByHardware_Id(id), TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(HardwareTransaction.class)),
+                TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(GetHardwareTransaction.class)));
+    }
+
+    @Override
+    public List<GetHardwareTransaction> findAll() {
+        return (List<GetHardwareTransaction>) conversionService.convert(hardwareTransactionJpaRepository.findAll(), TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(HardwareTransaction.class)),
                 TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(GetHardwareTransaction.class)));
     }
 }

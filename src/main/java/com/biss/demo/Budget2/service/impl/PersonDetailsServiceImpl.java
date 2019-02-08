@@ -4,7 +4,6 @@ import com.biss.demo.Budget2.dto.GetPersonDto;
 import com.biss.demo.Budget2.dto.PersonDetailsDto;
 import com.biss.demo.Budget2.model.*;
 import com.biss.demo.Budget2.repository.*;
-import com.biss.demo.Budget2.service.BudgetDtoService;
 import com.biss.demo.Budget2.service.PersonDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -19,20 +18,16 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
     private final PositionJpaRepository positionJpaRepository;
     private final ConversionService conversionService;
     private final PersonPositionJpaRepository personPositionJpaRepository;
-    private final BudgetPositionJpaRepository budgetPositionJpaRepository;
-    private final BudgetTransactionServiceImpl budgetTransactionService;
-    private final BudgetDtoServiceImpl budgetDtoServiceImpl;
+
 
     @Autowired
-    public PersonDetailsServiceImpl(BudgetJpaRepository budgetJpaRepository, PersonJpaRepository personJpaRepository, PositionJpaRepository positionJpaRepository, ConversionService conversionService, PersonPositionJpaRepository personPositionJpaRepository, BudgetPositionJpaRepository budgetPositionJpaRepository, BudgetTransactionServiceImpl budgetTransactionService, BudgetDtoServiceImpl budgetDtoServiceImpl) {
+    public PersonDetailsServiceImpl(BudgetJpaRepository budgetJpaRepository, PersonJpaRepository personJpaRepository, PositionJpaRepository positionJpaRepository, ConversionService conversionService, PersonPositionJpaRepository personPositionJpaRepository) {
         this.budgetJpaRepository = budgetJpaRepository;
         this.personJpaRepository = personJpaRepository;
         this.positionJpaRepository = positionJpaRepository;
         this.conversionService = conversionService;
         this.personPositionJpaRepository = personPositionJpaRepository;
-        this.budgetPositionJpaRepository = budgetPositionJpaRepository;
-        this.budgetTransactionService = budgetTransactionService;
-        this.budgetDtoServiceImpl = budgetDtoServiceImpl;
+
     }
 
     @Override
@@ -72,7 +67,6 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
         person.setEmail(person.getEmail());
         personDetailsDto.setId(person.getId());
         person.setPositionList(Collections.singletonList(positionJpaRepository.getOne(personDetailsDto.getPositionId())));
-        personDetailsDto.setInitialBudget(budgetDtoServiceImpl.findBudgetByPosition(personDetailsDto.getPositionId()));
         personJpaRepository.save(person);
         return personDetailsDto;
     }

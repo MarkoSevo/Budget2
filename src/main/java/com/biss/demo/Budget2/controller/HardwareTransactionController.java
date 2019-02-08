@@ -43,6 +43,11 @@ public class HardwareTransactionController {
         return getHardwareTransactionService.findAllByHardware(id);
     }
 
+    @GetMapping (value = "/all")
+    private List<GetHardwareTransaction> findAllTransactions(){
+        return getHardwareTransactionService.findAll();
+    }
+
 }
 
 

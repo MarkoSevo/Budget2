@@ -44,7 +44,7 @@ public class BudgetTransactionController {
         return jpaRepository.findBudgetTransactionById(id);
     }
 
-    @GetMapping(value = "/personId/id/{id}")
+    @GetMapping(value = "/personId/{id}")
     public List<BudgetTransactionPersonDto> findBudgetTransactionByPersonId(final @PathVariable("id")Long id){
         return budgetTransactionPersonDtoService.findAllByPersonId(id);
     }

@@ -6,7 +6,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HardwareTransactionTypeDtoToHardwareTransaction implements Converter <HardwareTransactionTypeDto, HardwareTransactionType> {
+public class HardwareTransactionTypeDtoToHardwareTransactionType implements Converter <HardwareTransactionTypeDto, HardwareTransactionType> {
     @Override
     public HardwareTransactionType convert(HardwareTransactionTypeDto source) {
         return new HardwareTransactionType(source.getId(),null,source.getType(),null);

@@ -17,14 +17,12 @@ public class BudgetDtoServiceImpl implements BudgetDtoService {
     private final ConversionService conversionService;
     private final BudgetJpaRepository budgetJpaRepository;
     private final BudgetPositionJpaRepository budgetPositionJpaRepository;
-    private final InitialBudgetTransactionServiceImpl initialBudgetTransactionService;
 
     @Autowired
-    public BudgetDtoServiceImpl(ConversionService conversionService, BudgetJpaRepository budgetJpaRepository, BudgetPositionJpaRepository budgetPositionJpaRepository, InitialBudgetTransactionServiceImpl initialBudgetTransactionService) {
+    public BudgetDtoServiceImpl(ConversionService conversionService, BudgetJpaRepository budgetJpaRepository, BudgetPositionJpaRepository budgetPositionJpaRepository) {
         this.conversionService = conversionService;
         this.budgetJpaRepository = budgetJpaRepository;
         this.budgetPositionJpaRepository = budgetPositionJpaRepository;
-        this.initialBudgetTransactionService = initialBudgetTransactionService;
     }
 
     @Override
