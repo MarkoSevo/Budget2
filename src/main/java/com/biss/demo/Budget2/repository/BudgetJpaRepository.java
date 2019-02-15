@@ -13,9 +13,6 @@ public interface BudgetJpaRepository extends JpaRepository<Budget, Long> {
 
    Budget findBudgetById(Long id);
 
-   @Query(value = "SELECT SUM(INPUT_AMOUNT)-SUM(OUTPUT_AMOUNT) FROM BUDGET_TRANSACTION WHERE PERSON_ID = ?", nativeQuery = true)
-   BigDecimal findRemainingAmount(Long id);
-
    @Query (value = "SELECT AMOUNT\n" +
            "FROM PERSON_POSITION\n" +
            "JOIN POSITION\n" +

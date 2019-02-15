@@ -8,7 +8,5 @@ import java.util.List;
 @Repository
 public interface HardwareTypeJpaRepository extends JpaRepository<HardwareType, Long> {
 
-    List<HardwareType> findAllById (Long id);
-
     List<HardwareType> findHardwareTypeIdByType (String type);
 }

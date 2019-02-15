@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -18,4 +18,6 @@ public class GetHardwareTransaction {
     private Date transactionDate;
     private Long hardwareId;
     private String hardwareTransactionType;
+    private BigDecimal hardwarePrice;
+
 }

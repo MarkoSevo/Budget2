@@ -8,4 +8,6 @@ public interface HardwareTypeDtoService {
     HardwareTypeDto getOneById (Long id);
 
     List<HardwareTypeDto> findAll();
+
+    HardwareTypeDto save(HardwareTypeDto hardwareTypeDto);
 }

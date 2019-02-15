@@ -27,8 +27,8 @@ public class BudgetController {
     }
 
     @PostMapping (value = "/post")
-    public Budget save(@RequestBody BudgetDto amount){
-        return jpaRepository.save(conversionService.convert(amount, Budget.class));
+    public BudgetDto save(@RequestBody BudgetDto amount){
+        return budgetDtoServiceImpl.save(amount);
     }
 
     @GetMapping (value = "/id/{id}")
@@ -45,11 +45,4 @@ public class BudgetController {
     public BigDecimal findBudgetByPosition(final @PathVariable Long id){
         return budgetDtoServiceImpl.findBudgetByPosition(id);
     }
-
-//    @GetMapping (value = "/all")
-//    public List<BudgetDto> findALL() {
-//        return (List<BudgetDto>) conversionService.convert(jpaRepository.findAll(), TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(Budget.class)),
-//                TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(BudgetDto.class)));
-//    }
-
 }

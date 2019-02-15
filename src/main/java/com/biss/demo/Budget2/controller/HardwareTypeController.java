@@ -20,21 +20,19 @@ public class HardwareTypeController {
     private final HardwareTypeJpaRepository jpaRepository;
     private final ConversionService conversionService;
     private final HardwareTypeDtoService hardwareTypeDtoService;
-    private final HardwareTypeJpaRepository hardwareTypeJpaRepository;
     private final HardwareJpaRepository hardwareJpaRepository;
 
     @Autowired
-    public HardwareTypeController(HardwareTypeJpaRepository jpaRepository, ConversionService conversionService, HardwareTypeDtoService hardwareTypeDtoService, HardwareTypeJpaRepository hardwareTypeJpaRepository, HardwareJpaRepository hardwareJpaRepository) {
+    public HardwareTypeController(HardwareTypeJpaRepository jpaRepository, ConversionService conversionService, HardwareTypeDtoService hardwareTypeDtoService, HardwareJpaRepository hardwareJpaRepository) {
         this.jpaRepository = jpaRepository;
         this.conversionService = conversionService;
         this.hardwareTypeDtoService = hardwareTypeDtoService;
-        this.hardwareTypeJpaRepository = hardwareTypeJpaRepository;
         this.hardwareJpaRepository = hardwareJpaRepository;
     }
 
-    @PostMapping(value = "/post/")
-    public HardwareType save(@RequestBody HardwareTypeDto newHardwareType) {
-        return jpaRepository.save(conversionService.convert(newHardwareType, HardwareType.class));
+    @PostMapping(value = "/post")
+    public HardwareTypeDto save(@RequestBody HardwareTypeDto newHardwareType) {
+        return hardwareTypeDtoService.save(newHardwareType);
     }
 
     @GetMapping(value = "/all")
@@ -44,14 +42,12 @@ public class HardwareTypeController {
 
     @GetMapping(value = "/type/{type}")
     public List<HardwareTypeDto> findAllByType(final @PathVariable String type){
-        List<HardwareTypeDto> hardwareTypeDtoList = (List<HardwareTypeDto>) conversionService.convert(jpaRepository.findHardwareTypeIdByType(type), TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(HardwareType.class)),
+        return (List<HardwareTypeDto>) conversionService.convert(jpaRepository.findHardwareTypeIdByType(type), TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(HardwareType.class)),
                 TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(HardwareTypeDto.class)));
-        return hardwareTypeDtoList;
     }
 
     @GetMapping (value = "/hardwareType/{hardwareType}")
-    public List<HardwareDetailsDto> findAllByHardwareType(final @PathVariable String hardwareType)
-    {
+    public List<HardwareDetailsDto> findAllByHardwareType(final @PathVariable String hardwareType) {
         return (List<HardwareDetailsDto>) conversionService.convert(hardwareJpaRepository.findAllByHardwareType_Type(hardwareType), TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(Hardware.class)),
                 TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(HardwareDetailsDto.class)));
     }

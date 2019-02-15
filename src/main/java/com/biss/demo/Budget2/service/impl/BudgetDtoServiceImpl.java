@@ -2,8 +2,8 @@ package com.biss.demo.Budget2.service.impl;
 
 import com.biss.demo.Budget2.dto.BudgetDto;
 import com.biss.demo.Budget2.model.Budget;
+import com.biss.demo.Budget2.model.Position;
 import com.biss.demo.Budget2.repository.BudgetJpaRepository;
-import com.biss.demo.Budget2.repository.BudgetPositionJpaRepository;
 import com.biss.demo.Budget2.service.BudgetDtoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -16,13 +16,11 @@ public class BudgetDtoServiceImpl implements BudgetDtoService {
 
     private final ConversionService conversionService;
     private final BudgetJpaRepository budgetJpaRepository;
-    private final BudgetPositionJpaRepository budgetPositionJpaRepository;
 
     @Autowired
-    public BudgetDtoServiceImpl(ConversionService conversionService, BudgetJpaRepository budgetJpaRepository, BudgetPositionJpaRepository budgetPositionJpaRepository) {
+    public BudgetDtoServiceImpl(ConversionService conversionService, BudgetJpaRepository budgetJpaRepository) {
         this.conversionService = conversionService;
         this.budgetJpaRepository = budgetJpaRepository;
-        this.budgetPositionJpaRepository = budgetPositionJpaRepository;
     }
 
     @Override
@@ -32,4 +30,14 @@ public class BudgetDtoServiceImpl implements BudgetDtoService {
         dto.setAmount(budget.getAmount());
         return dto.getAmount();
     }
+
+    @Override
+    public BudgetDto save(BudgetDto budgetDto) {
+        Budget budget = conversionService.convert(budgetDto, Budget.class);
+        budget.setAmount(budget.getAmount());
+        budgetJpaRepository.save(budget);
+        budgetDto.setId(budget.getId());
+        return budgetDto;
+    }
+
 }

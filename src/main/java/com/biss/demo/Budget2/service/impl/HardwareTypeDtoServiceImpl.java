@@ -35,4 +35,13 @@ public class HardwareTypeDtoServiceImpl implements HardwareTypeDtoService {
         return (List<HardwareTypeDto>) conversionService.convert(hardwareTypeJpaRepository.findAll(), TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(HardwareType.class)),
                 TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(HardwareTypeDto.class)));
     }
+
+    @Override
+    public HardwareTypeDto save(HardwareTypeDto hardwareTypeDto) {
+        HardwareType hardwareType = conversionService.convert(hardwareTypeDto, HardwareType.class);
+        hardwareType.setType(hardwareTypeDto.getType());
+        hardwareTypeJpaRepository.save(hardwareType);
+        hardwareTypeDto.setId(hardwareType.getId());
+        return hardwareTypeDto;
+    }
 }

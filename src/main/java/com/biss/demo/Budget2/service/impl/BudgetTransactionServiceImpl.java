@@ -2,17 +2,15 @@ package com.biss.demo.Budget2.service.impl;
 
 import com.biss.demo.Budget2.dto.BudgetInputTransactionDto;
 import com.biss.demo.Budget2.dto.BudgetOutputTransactionDto;
-import com.biss.demo.Budget2.dto.HardwareDetailsDto;
 import com.biss.demo.Budget2.model.BudgetTransaction;
+import com.biss.demo.Budget2.model.Person;
 import com.biss.demo.Budget2.repository.BudgetTransactionJpaRepository;
 import com.biss.demo.Budget2.repository.PersonJpaRepository;
 import com.biss.demo.Budget2.service.BudgetTransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
-
 
 @Service
 public class BudgetTransactionServiceImpl implements BudgetTransactionService {
@@ -47,19 +45,24 @@ public class BudgetTransactionServiceImpl implements BudgetTransactionService {
         }
 
         @Override
-        public BigDecimal saveInitialTransaction(Long id) {
-
+        public BudgetInputTransactionDto saveInitialTransaction(BigDecimal amount,Long id) {
+            BudgetTransaction budgetTransaction = new BudgetTransaction();
             BudgetInputTransactionDto budgetInputTransactionDto = new BudgetInputTransactionDto();
-            BudgetTransaction budgetTransaction = conversionService.convert(budgetInputTransactionDto, BudgetTransaction.class);
-            return budgetInputTransactionDto.getAmount();
+            conversionService.convert(budgetInputTransactionDto, BudgetTransaction.class);
+            budgetTransaction.setInputAmount(amount);
+            budgetTransaction.setPerson(personJpaRepository.getOne(id));
+            budgetTransactionJpaRepository.save(budgetTransaction);
+            return budgetInputTransactionDto;
         }
 
         @Override
-        public BudgetOutputTransactionDto hardwareTransaction(BigDecimal price) {
+        public BudgetOutputTransactionDto hardwareTransaction(BigDecimal amount, Person id) {
+            BudgetTransaction budgetTransaction = new BudgetTransaction();
             BudgetOutputTransactionDto budgetOutputTransactionDto = new BudgetOutputTransactionDto();
-            HardwareDetailsDto hardwareDetailsDto = new HardwareDetailsDto();
-            BudgetTransaction budgetTransaction = conversionService.convert(budgetOutputTransactionDto, BudgetTransaction.class);
-            budgetTransaction.setOutputAmount(hardwareDetailsDto.getPrice());
+            conversionService.convert(budgetOutputTransactionDto, BudgetTransaction.class);
+            budgetTransaction.setOutputAmount(amount);
+            budgetTransaction.setPerson(id);
+            budgetTransactionJpaRepository.save(budgetTransaction);
             return budgetOutputTransactionDto;
         }
 

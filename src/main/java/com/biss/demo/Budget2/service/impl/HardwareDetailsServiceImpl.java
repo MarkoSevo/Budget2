@@ -33,6 +33,7 @@ public class HardwareDetailsServiceImpl implements HardwareDetailsService {
         Hardware hardware = conversionService.convert(hardwareDetailsDto,Hardware.class);
         hardware.setHardwareType(hardwareTypeJpaRepository.getOne(Long.valueOf(hardwareDetailsDto.getHardwareType())));
         hardwareJpaRepository.save(hardware);
+        hardwareDetailsDto.setId(hardware.getId());
         return hardwareDetailsDto;
     }
 

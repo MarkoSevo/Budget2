@@ -9,7 +9,6 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Entity
@@ -41,15 +40,4 @@ public class Budget{
             inverseJoinColumns = @JoinColumn(name = "position_id")
     )
     private List<Position> positionList = new ArrayList<>();
-
-
 }
-//    @ManyToMany(cascade = {
-//            CascadeType.MERGE
-//    })
-//    @JoinTable(name = "person_position",
-//            joinColumns = @JoinColumn(name = "person_id"),
-//            inverseJoinColumns = @JoinColumn(name = "position_id")
-//    )
-//    @Column(insertable = false, updatable = false)
-//    private Set<Position> positionList;

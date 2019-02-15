@@ -12,6 +12,6 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class BudgetDto {
 
+    private Long id;
     private BigDecimal amount;
-
 }

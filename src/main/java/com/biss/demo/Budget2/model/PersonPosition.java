@@ -36,13 +36,3 @@ public class PersonPosition implements Serializable {
     @JoinColumn(name = "position_id")
     private Position position;
 }
-
-//    @Id
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn (name = "person_id")
-//    private Person person;
-//
-//    @Id
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn (name = "position_id")
-//    private Position position;

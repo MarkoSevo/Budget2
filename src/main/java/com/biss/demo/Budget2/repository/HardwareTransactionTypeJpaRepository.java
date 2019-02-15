@@ -1,6 +1,5 @@
 package com.biss.demo.Budget2.repository;
 
-import com.biss.demo.Budget2.model.Hardware;
 import com.biss.demo.Budget2.model.HardwareTransactionType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

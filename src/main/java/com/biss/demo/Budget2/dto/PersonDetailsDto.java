@@ -2,13 +2,12 @@ package com.biss.demo.Budget2.dto;
 
 import lombok.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PersonDetailsDto {
+public class PersonDetailsDto{
 
     private Long id;
     private String firstName;

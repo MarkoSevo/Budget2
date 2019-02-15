@@ -1,11 +1,8 @@
 package com.biss.demo.Budget2.controller;
 
 import com.biss.demo.Budget2.dto.PositionDto;
-import com.biss.demo.Budget2.model.Position;
-import com.biss.demo.Budget2.repository.PositionJpaRepository;
 import com.biss.demo.Budget2.service.PositionDtoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -13,20 +10,16 @@ import java.util.List;
 @RequestMapping("/positions")
 public class PositionController {
 
-    private final PositionJpaRepository positionJpaRepository;
-    private final ConversionService conversionService;
     private final PositionDtoService positionDtoService;
 
 
     @Autowired
-    public PositionController(PositionJpaRepository positionJpaRepository, ConversionService conversionService, PositionDtoService positionDtoService) {
-        this.positionJpaRepository = positionJpaRepository;
-        this.conversionService = conversionService;
+    public PositionController(PositionDtoService positionDtoService) {
         this.positionDtoService = positionDtoService;
     }
 
-    @PostMapping(value = "/post/")
-    public Position savePosition(@RequestBody Position newPosition) {
+    @PostMapping(value = "/post")
+    public PositionDto savePosition(@RequestBody PositionDto newPosition) {
         return positionDtoService.save(newPosition);
     }
 

@@ -2,6 +2,7 @@ package com.biss.demo.Budget2.service;
 
 import com.biss.demo.Budget2.dto.BudgetInputTransactionDto;
 import com.biss.demo.Budget2.dto.BudgetOutputTransactionDto;
+import com.biss.demo.Budget2.model.Person;
 
 import java.math.BigDecimal;
 
@@ -11,8 +12,10 @@ public interface BudgetTransactionService {
 
     BudgetOutputTransactionDto saveOutput(BudgetOutputTransactionDto budgetTransactionDto);
 
-    BigDecimal saveInitialTransaction(Long id);
+    BudgetInputTransactionDto saveInitialTransaction(BigDecimal amount, Long id);
 
-    BudgetOutputTransactionDto hardwareTransaction(BigDecimal price);
+    BudgetOutputTransactionDto hardwareTransaction(BigDecimal amount, Person id);
+
+//    BudgetOutputTransactionDto personHardwareTransaction(Long id);
 
 }

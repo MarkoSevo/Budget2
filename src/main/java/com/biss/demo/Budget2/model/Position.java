@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.*;
 
-
 @Data
 @Entity
 @Builder
@@ -38,20 +37,5 @@ public class Position {
 
     @ManyToMany(mappedBy = "positionList",fetch = FetchType.LAZY)
     private List<Budget> budgetList = new ArrayList<>();
-//
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//
-//        Position position = (Position) o;
-//
-//        return Objects.equals(id, position.id);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return id != null ? id.hashCode() : 0;
-//    }
 }
 

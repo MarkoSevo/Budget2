@@ -14,6 +14,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @IdClass(value = HardwareBudgetTransaction.class)
 @Table(name = "hardware_budget_transaction")
+
 public class HardwareBudgetTransaction implements Serializable{
 
     @Id

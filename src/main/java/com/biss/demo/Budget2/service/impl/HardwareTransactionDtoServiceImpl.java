@@ -38,7 +38,7 @@ public class HardwareTransactionDtoServiceImpl implements HardwareTransactionDto
         hardwareTransaction.setHardware(hardwareJpaRepository.getOne(hardwareTransactionDto.getHardwareId()));
         hardwareTransaction.setPerson(personJpaRepository.getOne(hardwareTransactionDto.getPersonId()));
         hardwareTransaction.setHardwareTransactionType(hardwareTransactionTypeJpaRepository.getOne(hardwareTransactionDto.getHardwareTransactionTypeId()));
-        budgetTransactionService.hardwareTransaction(hardwareTransaction.getHardware().getPrice());
+        budgetTransactionService.hardwareTransaction(hardwareTransaction.getHardware().getPrice(),hardwareTransaction.getPerson());
         hardwareTransactionJpaRepository.save(hardwareTransaction);
         return hardwareTransactionDto;
     }

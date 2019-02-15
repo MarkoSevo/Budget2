@@ -11,8 +11,6 @@ public interface HardwareTransactionJpaRepository extends JpaRepository<Hardware
 
     List<HardwareTransaction> findHardwareTransactionsByPersonId (Long id);
 
-    List<HardwareTransaction> findAllByPerson_Id(Long id);
-
     List<HardwareTransaction> findAllByHardware_Id (Long id);
 
     HardwareDetailsDto findHardwareTransactionsByHardware_Id (Long id);

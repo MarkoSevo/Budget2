@@ -13,6 +13,5 @@ public interface PositionDtoService {
 
     List<PositionDto> findAll ();
 
-    Position save(Position newPosition);
-
+    PositionDto save(PositionDto positionDto);
 }

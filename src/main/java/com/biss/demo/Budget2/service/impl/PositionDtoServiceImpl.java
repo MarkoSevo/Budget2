@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -21,7 +23,6 @@ public class PositionDtoServiceImpl implements PositionDtoService {
         this.positionJpaRepository = positionJpaRepository;
         this.conversionService = conversionService;
     }
-
 
     @Override
     public PositionDto findPositionByPosition(String positionName) {
@@ -47,7 +48,11 @@ public class PositionDtoServiceImpl implements PositionDtoService {
     }
 
     @Override
-    public Position save(Position newPosition) {
-        return positionJpaRepository.save(newPosition);
+    public PositionDto save(PositionDto positionDto) {
+        Position position = conversionService.convert(positionDto, Position.class);
+        position.setId(position.getId());
+        position.setPosition(position.getPosition());
+        positionJpaRepository.save(position);
+        return positionDto;
     }
 }
